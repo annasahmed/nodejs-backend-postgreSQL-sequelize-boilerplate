@@ -1,0 +1,24 @@
+version: 0.0
+os: linux
+
+files:
+    - source: /
+      destination: /home/ubuntu/d3-backend
+      overwrite: true
+file_exists_behavior: OVERWRITE
+
+permissions:
+    - object: /home/ubuntu/d3-backend
+      pattern: "**"
+      owner: ubuntu
+      group: ubuntu
+      mode: 775
+      type :
+          - file
+hooks:
+    BeforeInstall:
+    AfterInstall:
+    ApplicationStart:
+        - location: scripts/app_start.sh
+          timeout: 2500
+          runas: ubuntu

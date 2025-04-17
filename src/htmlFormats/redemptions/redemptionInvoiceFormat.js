@@ -1,0 +1,410 @@
+const { numberToWords } = require('../../utils/globals');
+const dayjs = require('dayjs');
+const redemptionInvoiceFormat = (vendor, records, data) => {
+	let total = 0;
+	let discount = 0;
+	let totalCommission = 0;
+	let html = `
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+			@page {
+				margin: 0;
+			}
+			* {
+				padding: 0px;
+				margin: 0px;
+				box-sizing: border-box;
+			}
+			body {
+				font-family: 'Roboto', sans-serif;
+				margin: 0;
+				padding: 0 0 20mm 0;
+				background-color: #ffffff;
+				/* height: 100vh; */
+			}
+			header {
+				background-color: #f43db0;
+				height: 20px;
+				position: fixed;
+				top: 0px;
+				right: 0px;
+				border: 1px solid red;
+				width: 100%;
+			}
+			.page {
+				page-break-before: always;
+				padding-top: 170px;
+				padding-bottom: 20px;
+			}
+			.main-logo {
+				width: 220px;
+				object-fit: contain;
+				position: fixed;
+				top: 10px;
+			}
+			footer {
+				position: fixed;
+				bottom: 0px;
+				right: 0px;
+				width: 100%;
+				/* max-width: 100%; */
+				background-color: #1d95fb;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				color: #ffffff;
+				font-size: 11px;
+				letter-spacing: 1px;
+				font-weight: 400;
+				padding: 15px;
+			}
+			.footer-label {
+				display: flex;
+				align-items: center;
+				gap: 5px;
+			}
+			.footer-icon-container {
+				border: 1px solid #ffffff;
+				border-radius: 50%;
+				width: 20px;
+				height: 20px;
+				transform: translate(-45);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding-left: 0.3px;
+			}
+			.footer-icons {
+				transform: rotate(-45deg);
+			}
+			main {
+				width: 100%;
+				padding: 0 80px 80px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			.logo {
+				width: 240px;
+				object-fit: contain;
+			}
+			.watermark {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%) rotate(-40deg);
+				opacity: 0.05;
+				z-index: 99;
+				color: white;
+				width: 700px;
+			}
+			.flex-1 {
+				flex: 1;
+			}
+			.flex-3 {
+				flex: 3;
+			}
+			.heading {
+				font-size: 16px;
+				text-transform: uppercase;
+				font-weight: 500;
+				display: flex;
+				justify-content: space-between;
+				min-height: 50px;
+			}
+			.data {
+				font-size: 14px;
+				display: flex;
+				justify-content: space-between;
+			}
+			.bottom-border {
+				border-bottom: 1px solid lightgray;
+				padding-bottom: 5px;
+			}
+			.box {
+				min-height: 60px;
+				border-bottom: 1px solid lightgray;
+				display: flex;
+				justify-content: space-between;
+				margin: auto 0;
+				gap: 10px;
+			}
+			.box h2,
+			.heading h2 {
+				font-weight: 500;
+				font-size: 13px;
+				margin: auto 0;
+			}
+			.box p,
+			.heading p {
+				font-weight: 400;
+				font-size: 12px;
+				font-style: italic;
+				margin: auto 0;
+				line-height: 20px;
+				text-transform: none;
+			}
+			.flex {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.px-2 {
+				padding-left: 0.5rem;
+				padding-right: 0.5rem;
+			}
+			table {
+				width: 100%; /* Make the table span the full width of the container */
+				border-collapse: collapse; /* Remove default spacing between table cells */
+			}
+
+			table th,
+			table td {
+				border-bottom: 1px solid #ddd; /* Add bottom border to all rows */
+				text-align: left; /* Align text to the left */
+				padding: 8px; /* Add padding for better readability */
+				width: auto; /* Ensure columns adjust to equal width */
+			}
+
+			table th {
+				font-weight: 500; /* Make headings slightly bold */
+				/* background-color: #f9f9f9; Optional: Light background for table headers */
+				font-weight: 500;
+				font-size: 13px;
+				margin: auto 0;
+			}
+
+			table td {
+				vertical-align: top; /* Ensure proper alignment of cell content */
+				font-weight: 400;
+				font-size: 12px;
+				font-style: italic;
+				margin: auto 0;
+				line-height: 20px;
+				text-transform: none;
+			}
+		</style>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+		/>
+	</head>
+	<body>
+		<header></header>
+		<main>
+			<img
+				src="https://cms.dubaidailydeals.app/logo-ddd-slogan.png"
+				class="main-logo"
+				alt="logo"
+				style="margin: 30px 0"
+			/>
+			<img
+				src="https://cms.dubaidailydeals.app/complete-logo.png"
+				class="watermark"
+				alt="logo"
+			/>
+
+			<div style="width: 100%" class="page">
+				<div class="heading">
+					<h2>Billed To</h2>
+					<h2>Invoice: #${data.invoiceNumber}</h2>
+				</div>
+				<div class="data bottom-border box">
+					<div class="flex-1">
+						<p class="flex-1" style="text-transform: uppercase">
+							${vendor.name}
+						</p>
+						<p class="flex-1" style="text-transform: uppercase">
+							${vendor.contact_person_name ? vendor.contact_person_name : ''}
+						</p>
+					</div>
+					<p class="flex-1" style="text-align: right">${dayjs(data.invoiceDate).format('DD/MM/YYYY')}</p>
+				</div>`;
+	html += `
+        <div class="box">
+					<h2 class="flex-1">Place</h2>
+					<h2 class="flex-1">Total Sales</h2>
+					<h2 class="flex-1">Total Discount</h2>
+					<h2 class="flex-1" style="text-align: right">App Commission</h2>
+				</div>`;
+	Object.keys(records).forEach((key) => {
+		const data = records[key];
+		const place = data.place;
+		const redemptions = data.redemptions;
+		redemptions.forEach((redemption, index) => {
+			total += redemption.total;
+			discount += redemption.discount_amount;
+			totalCommission += redemption.commission_amount;
+		});
+	});
+	Object.keys(records).forEach((key) => {
+		const data = records[key];
+		const place = data.place;
+		const redemptions = data.redemptions;
+		let placeTotal = 0;
+		let placeDiscount = 0;
+		let placeAppCommission = 0;
+		redemptions.forEach((redemption, index) => {
+			placeTotal += redemption.total;
+			placeDiscount += redemption.discount_amount;
+			placeAppCommission += redemption.commission_amount;
+		});
+		html += `<div class="box">
+					<p class="flex-1 px-2">
+						${place.title}
+					</p>
+					<p class="flex-1 px-2">AED ${placeTotal}</p>
+					<p class="flex-1 px-2">AED ${placeDiscount}</p>
+					<p class="flex-1 px-2" style="text-align: right">AED ${placeAppCommission}</p> 
+				</div>`;
+	});
+	html += `<br><br>
+				<div class="box">
+					<div style="margin: auto 0" class="flex-3">
+						<p class="flex-3">Total Sale</p>
+						<p class="flex-3">Total Discount</p>
+						<p class="flex-3">App Commission</p>
+					</div>
+					<div style="margin: auto 0">
+						<p class="flex-1" style="text-align: right">
+							${total}
+						</p>
+						<p class="flex-1" style="text-align: right">
+							${discount}
+						</p>
+						<p class="flex-1" style="text-align: right">
+							${totalCommission}
+						</p>
+					</div>
+				</div>
+				<div class="heading">
+					<h2 class="flex-3">TOTAL Payable</h2>
+					<h2 class="flex-1" style="text-align: right">
+						AED ${totalCommission}
+					</h2>
+				</div>
+				<div class="heading" style="min-height: 20px">
+					<h2 class="flex-3">${numberToWords(totalCommission)}</h2>
+				</div>
+				<div>
+					<img
+						src="https://cms.dubaidailydeals.app/thank-you-img.png"
+						class="logo"
+						alt="logo"
+						style="margin: 20px 0 15px; width: 200px"
+					/>
+				</div>
+
+				<div class="heading" style="display: block; position: relative">
+					<h2 class="flex-3">PAYMENT INFORMATION</h2>
+					<div style="display: flex; gap: 10px; margin: 20px 0">
+						<div style="">
+							<p>Bank:</p>
+							<p>Account Name:</p>
+							<p>Account Number:</p>
+							<p>IBAN:</p>
+							<p>BIC:</p>
+						</div>
+						<div style="">
+							<h2>WIO BANK</h2>
+							<h2>D U DAILY DEALS</h2>
+							<h2>9249120896</h2>
+							<h2>AE4 808600000092491 20896</h2>
+							<h2>WIOBAEADXXX</h2>
+						</div>
+						<div
+							class=""
+							style="position: absolute; right: 0px; top: -30px"
+						>
+							<img
+								src="https://cms.dubaidailydeals.app/D3-stamp.png"
+								class="logo"
+								alt="logo"
+								style="width: 175px"
+							/>
+						</div>
+					</div>
+				</div>
+				<div class="heading" style="display: block">
+					<p>
+						Payment is required within 14 business days of invoice
+						date.
+					</p>
+					<p>
+						Please send the deposit receipt to
+						info@dubaidailydeals.app
+					</p>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<p>FOR INQUIRIES:</p>
+			<div class="footer-label">
+				<p class="footer-icon-container">
+					<i class="fa-solid fa-phone-volume footer-icons"></i>
+				</p>
+				+971 556955390
+			</div>
+			<div class="footer-label">
+				<p class="footer-icon-container">
+					<i class="fa-solid fa-envelope"></i>
+				</p>
+				info@dubaidailydeals.app
+			</div>
+			<div class="footer-label">
+				<p class="footer-icon-container">
+					<i class="fa-brands fa-instagram"></i>
+				</p>
+				@dubaidailydeals
+			</div>
+		</footer>
+
+`;
+	html += `
+	<main style="display: block" class="page"><table>
+        <thead>
+					<tr>
+						<th>Place</th>
+						<th>Redemption</th>
+						<th>User</th>
+						<th style="text-align: center">Total (AED)</th>
+						<th style="text-align: center">
+							Discount Amount (AED)
+						</th>
+						<th style="text-align: center">App Commission (AED)</th>
+						<th>Redemption Code</th>
+						<th>Redemption Date</th>
+					</tr>
+				</thead>`;
+	Object.keys(records).forEach((key) => {
+		const data = records[key];
+		const place = data.place;
+		const redemptions = data.redemptions;
+		redemptions.forEach((redemption, index) => {
+			total += redemption.total;
+			discount += redemption.discount_amount;
+			totalCommission += redemption.commission_amount;
+			html += `<tr>
+					<td class="flex-1">
+						${index === 0 ? place.title : ''}
+					</td>
+					<td class="flex-1 px-2">${redemption.deal_id ? redemption.deal?.title || 'Deal' : 'E-Commerce'}</td>
+					<td class="flex-1 px-2">${redemption.user ? redemption.user.first_name + ' ' + redemption.user.last_name : 'User'}</td>
+					<td class="flex-1 px-2" style="text-align: center;">${redemption.total}</td>
+					<td class="flex-1 px-2" style="text-align: center;">${redemption.discount_amount}</td>
+					<td class="flex-1 px-2" style="text-align: center;">${redemption.commission_amount}</td>
+					<td class="flex-1 px-2">${redemption.deal_sequence}</td>
+					<td class="flex-1 px-2">${dayjs(redemption.created_date_time).format('DD MMM, YYYY h:m A')}</td>
+				</tr>`;
+		});
+	});
+	html += `</table></main>	</body>
+</html>`;
+	return html;
+};
+
+module.exports = { redemptionInvoiceFormat };

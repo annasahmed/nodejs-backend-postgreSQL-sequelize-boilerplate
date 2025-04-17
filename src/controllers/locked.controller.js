@@ -1,0 +1,29 @@
+const httpStatus = require('http-status');
+const catchAsync = require('../utils/catchAsync');
+const { adminLockedService } = require('../services');
+
+const getLocked = catchAsync(async (req, res) => {
+	const locked = await adminLockedService.getLockedByCondition(req);
+	res.send({ locked });
+});
+
+const addLocked = catchAsync(async (req, res) => {
+	const locked = await adminLockedService.createLocked(req);
+	res.status(httpStatus.CREATED).send({ locked });
+});
+
+const deleteLockedByUserId = catchAsync(async (req, res) => {
+	await adminLockedService.deleteLockedByUserId(req);
+	res.status(httpStatus.ACCEPTED).send({ message: 'deleted successfully' });
+});
+const getLockedByUserId = catchAsync(async (req, res) => {
+	const locked = await adminLockedService.getLockedByUserId(req);
+	res.send({ locked });
+});
+
+module.exports = {
+	getLocked,
+	addLocked,
+	deleteLockedByUserId,
+	getLockedByUserId,
+};

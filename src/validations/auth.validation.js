@@ -1,5 +1,5 @@
-const Joi = require('@hapi/joi');
-const { password } = require('./custom.validation');
+import Joi from '@hapi/joi';
+import { password } from './custom.validation.js';
 
 const appRegister = {
 	body: Joi.object().keys({

@@ -1,8 +1,8 @@
-const express = require('express');
-const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const { infoController } = require('../../controllers');
-const upload = require('../../middlewares/multerUpload');
+import express from 'express';
+import validate from '../../middlewares/validate.js';
+import userValidation from '../../validations/user.validation.js';
+import { infoController } from '../../controllers/index.js';
+import upload from '../../middlewares/multerUpload.js';
 
 const router = express.Router();
 

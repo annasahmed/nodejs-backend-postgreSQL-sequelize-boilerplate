@@ -1,17 +1,11 @@
-const config = require('../config/config.js');
+import { CopyObjectCommand, DeleteObjectsCommand, GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { Upload } from '@aws-sdk/lib-storage';
+import path from 'path';
+import sharp from 'sharp';
+import config from '../config/config.js';
 const { accessKeyId, secretAccessKey, region, Bucket } = config.s3Bucket;
 const env = process.env.ENV;
-const { Upload } = require('@aws-sdk/lib-storage');
-const path = require('path');
-const {
-	S3Client,
-	DeleteObjectCommand,
-	CopyObjectCommand,
-	DeleteObjectsCommand,
-	GetObjectCommand,
-} = require('@aws-sdk/client-s3');
 
-const sharp = require('sharp');
 
 function getContentType(filename) {
 	const extension = filename.split('.').pop().toLowerCase();
@@ -144,7 +138,7 @@ async function deleteImageFromS3(req) {
 		throw new Error(`Error deleting image from S3 ${err}`);
 	}
 }
-const { URL } = require('url');
+import { URL } from 'url';
 async function copyImageToDestination(sourceUrl, destinationUrl) {
 	// const { sourceUrl, destinationUrl } = req.body;
 

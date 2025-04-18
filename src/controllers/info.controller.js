@@ -1,12 +1,10 @@
-import httpStatus from 'http-status'
-import catchAsync from '../utils/catchAsync';
-import ApiError from '../utils/ApiError';
+import httpStatus from 'http-status';
 import {
-	apiInfoService,
 	adminInfoService,
+	apiInfoService,
 	imageService,
-} from '../services'
-import dayjs from 'dayjs'
+} from '../services/index.js';
+import catchAsync from '../utils/catchAsync.js';
 
 const getInfos = catchAsync(async (req, res) => {
 	const clientId = req.headers['clientid'] === 'cms';

@@ -1,6 +1,6 @@
-import db from '../db/models'
-const { getUserById } = require('../services/user.service');
-import { verifyToken } from '../utils/auth'
+import db from '../db/models/index.js';
+import { getUserById } from '../services/user.service.js';
+import { verifyToken } from '../utils/auth.js';
 
 const getMethod = (method) => {
 	switch (method) {

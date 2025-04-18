@@ -1,6 +1,6 @@
 'use strict';
 
-const { createPermission } = require('../../services/permission.service');
+import { createPermission } from '../../services/permission.service';
 
 /** @type {import('sequelize-cli').Migration} */
 export default {

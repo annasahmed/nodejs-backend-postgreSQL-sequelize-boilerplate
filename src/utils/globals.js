@@ -1,6 +1,6 @@
-import ApiError from './ApiError';
-import httpStatus from 'http-status'
-import { verifyToken } from './auth';
+import httpStatus from 'http-status';
+import ApiError from './ApiError.js';
+import { verifyToken } from './auth.js';
 
 const getMultipleincludes = async (arr, dbArray) => {
 	for (const item of arr.rows) {
@@ -44,10 +44,8 @@ function findCommonElements(arrays) {
 		return acc;
 	}, []);
 }
-// const db = require('../db/models');
-import db from '../db/models'
-const { Op, where } = require('sequelize');
-const Sequelize = require('sequelize');
+import Sequelize, { Op } from 'sequelize';
+import db from '../db/models/index.js';
 
 const searchIds = (id) => {
 	return id
@@ -761,8 +759,7 @@ function numberToWords(num) {
 	return numberToCurrencyWords(num);
 }
 
-const axios = require('axios');
-const { object } = require('@hapi/joi');
+import axios from 'axios';
 
 async function getGoogleRating(lat, lng, phone) {
 	if (phone) {
@@ -982,35 +979,7 @@ const getDisplayTime = async (place) => {
 };
 
 export {
-	refactorCode,
-	searchIds,
-	searchManytoMany,
-	findCommonElements,
-	searchManytoManyTitle,
-	searchManytoManyArray,
-	nearByCondition,
-	getTimingPool,
-	searchManytoManyTiming,
-	getDistance,
-	padId,
-	getGoogleRating,
-	searchManytoManyDays,
-	searchManytoManyDaysArrNew,
-	convert24to12,
-	searchManytoManyDaysFilters,
-	reorderFunction,
-	removeItemArray,
-	updatePlaceFilters,
-	updatePlaceCategories,
-	deleteItem,
-
-	checkDeletedCondition,
-	softDelete,
-	numberToWords,
-	padNumber,
-	capitalizeString,
-	getAssociatePlaces,
-	daysOfWeek,
-
-	getDisplayTime,
+	capitalizeString, checkDeletedCondition, convert24to12, daysOfWeek, deleteItem, findCommonElements, getAssociatePlaces, getDisplayTime, getDistance, getGoogleRating, getTimingPool, nearByCondition, numberToWords, padId, padNumber, refactorCode, removeItemArray, reorderFunction, searchIds,
+	searchManytoMany, searchManytoManyArray, searchManytoManyDays,
+	searchManytoManyDaysArrNew, searchManytoManyDaysFilters, searchManytoManyTiming, searchManytoManyTitle, softDelete, updatePlaceCategories, updatePlaceFilters
 };

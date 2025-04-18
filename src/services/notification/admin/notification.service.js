@@ -1,12 +1,11 @@
-const db = require('../../../db/models').default;
-const ApiError = require('../../../utils/ApiError');
-const { NOT_FOUND } = require('http-status');
-const { FcmNotificationService } = require('../../../config/fcm');
-const { imageService } = require('../../index');
-import dayjs from 'dayjs'
-const { Op } = require('sequelize');
-const { addJobToQueue } = require('../../../queue/queue.service');
-const { uploadToS3 } = require('../../image.service');
+import dayjs from 'dayjs';
+import { NOT_FOUND } from 'http-status';
+import { Op } from 'sequelize';
+import { FcmNotificationService } from '../../../config/fcm.js';
+import db from '../../../db/models/index.js';
+import { addJobToQueue } from '../../../queue/queue.service.js';
+import ApiError from '../../../utils/ApiError.js';
+import { uploadToS3 } from '../../image.service.js';
 
 const createNotification = async (req, res) => {
 	let path = null;

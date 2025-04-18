@@ -1,2 +1,3 @@
 // This file exists because Sequelize only support import config as a string path, not an object
-export default require('../../config/config').sqlDB;
+import { sqlDB } from '../../config/config.js';
+export default sqlDB;

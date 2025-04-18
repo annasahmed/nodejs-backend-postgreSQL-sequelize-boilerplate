@@ -1,6 +1,6 @@
-const { getOffset } = require('../utils/query.js');
-const config = require('../config/config.js');
-const db = require('../db/models/index.js').default;
+import config from '../config/config.js';
+import db from '../db/models/index.js';
+import { getOffset } from '../utils/query.js';
 
 async function getLogs(req) {
 	const { page: defaultPage, limit: defaultLimit } = config.pagination;

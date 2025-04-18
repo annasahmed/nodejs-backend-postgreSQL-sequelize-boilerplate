@@ -1,11 +1,11 @@
-const cron = require('node-cron');
-import db from '../db/models'
-const { Op } = require('sequelize');
-const { sendRedemptionInvoice } = require('../services/email.service');
-const stripe = require('../config/stripe');
-import dayjs from 'dayjs'
-const { FcmNotificationService } = require('../config/fcm');
-const { addJobToQueue } = require('../queue/queue.service');
+import dayjs from 'dayjs';
+import cron from 'node-cron';
+import { Op } from 'sequelize';
+import { FcmNotificationService } from '../config/fcm.js';
+import stripe from '../config/stripe.js';
+import db from '../db/models/index.js';
+import { addJobToQueue } from '../queue/queue.service.js';
+import { sendRedemptionInvoice } from '../services/email.service.js';
 
 const disabledPastHappenings = cron.schedule('* * * * *', async () => {
 	const seasons = await db.seasons.findAll({

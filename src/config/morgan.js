@@ -1,10 +1,9 @@
 import morgan from 'morgan';
-import config from './config';
-import logger from './logger';
-import { verifyToken } from '../utils/auth'
-import db from '../db/models'
-// import { userService } from '../services'
-// import { getUserById } from '../services/user.service'
+// import db from '../db/models/index.js';
+import { verifyToken } from '../utils/auth.js';
+import config from './config.js';
+import logger from './logger.js';
+import db from '../db/models/index.js';
 
 morgan.token('message', (_req, res) => res.locals.errorMessage || '');
 morgan.token('req-body', (req) => {

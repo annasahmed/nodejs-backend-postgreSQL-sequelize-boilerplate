@@ -1,5 +1,3 @@
-const defaultPermissions = require('../config/permissions');
-
 export default (sequelize, DataTypes) => {
     const permission = sequelize.define(
         'permission',

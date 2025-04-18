@@ -1,8 +1,8 @@
 import httpStatus from 'http-status'
-const { getOffset } = require('../utils/query');
-import ApiError from '../utils/ApiError';
-const config = require('../config/config.js');
-import db from '../db/models'
+import { getOffset } from '../utils/query.js';
+import ApiError from '../utils/ApiError.js';
+import config from '../config/config.js'
+import db from '../db/models/index.js';
 
 async function getRoleById(roleId) {
 	const permission = await db.permission.findOne({

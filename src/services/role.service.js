@@ -1,9 +1,9 @@
-import httpStatus from 'http-status'
-const { getOffset } = require('../utils/query');
-import ApiError from '../utils/ApiError';
-const config = require('../config/config.js');
-import db from '../db/models'
-const { updatePlaceCategories, updatePlaceFilters } = require('../utils/globals.js');
+import httpStatus from 'http-status';
+import config from '../config/config.js';
+import db from '../db/models/index.js';
+import ApiError from '../utils/ApiError.js';
+import { updatePlaceFilters } from '../utils/globals.js';
+import { getOffset } from '../utils/query.js';
 
 async function getRoleById(roleId) {
 	const role = await db.role.findOne({

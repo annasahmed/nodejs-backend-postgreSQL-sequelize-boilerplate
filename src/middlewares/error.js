@@ -1,7 +1,7 @@
 import httpStatus from 'http-status'
-const config = require('../config/config');
-const logger = require('../config/logger');
-import ApiError from '../utils/ApiError';
+import config from '../config/config.js';
+import logger from '../config/logger.js';
+import ApiError from '../utils/ApiError.js';
 
 /**
  * Converts all errors to ApiError instance.

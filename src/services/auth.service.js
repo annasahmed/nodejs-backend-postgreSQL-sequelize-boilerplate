@@ -1,11 +1,11 @@
-import httpStatus from 'http-status'
-const userService = require('./user.service');
-import ApiError from '../utils/ApiError';
-const { decryptData } = require('../utils/auth').default;
-import db from '../db/models'
-const { getUserSaving } = require('./Api/UserSaving.service');
-const { UserSavingsTransformer } = require('../transformers');
-const { getPermissionByRoleId } = require('./permission.service');
+import httpStatus from 'http-status';
+import db from '../db/models/index.js';
+import { UserSavingsTransformer } from '../transformers.js';
+import ApiError from '../utils/ApiError.js';
+import { decryptData } from '../utils/auth.js';
+import { getUserSaving } from './Api/UserSaving.service.js';
+import { getPermissionByRoleId } from './permission.service.js';
+import userService from './user.service.js';
 
 async function loginUserWithEmailAndPassword(req, isUser = true) {
 	const { email, password } = req.body;

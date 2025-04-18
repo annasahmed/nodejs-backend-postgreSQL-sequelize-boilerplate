@@ -1,13 +1,8 @@
-const {
-	sendOTPEmailVerification,
-	sendForgotPasswordEmail,
-} = require('./email.service');
-import db from '../db/models'
-const { Op } = require('sequelize');
-
-const cron = require('node-cron');
-const { emailService } = require('.');
-const { getAppUserByEmail } = require('./appuser/admin/appuser.service');
+import cron from 'node-cron';
+import { Op } from 'sequelize';
+import db from '../db/models/index.js';
+import { getAppUserByEmail } from './appuser/admin/appuser.service.js';
+import { sendForgotPasswordEmail, sendOTPEmailVerification } from './email.service.js';
 
 // Schedule job to delete expired OTPs every minute
 cron.schedule('* * * * *', async () => {

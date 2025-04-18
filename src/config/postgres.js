@@ -1,6 +1,6 @@
-import { Client } from 'pg'
-import config from './config';
-import logger from './logger';
+import { Client } from 'pg';
+import config from './config.js';
+import logger from './logger.js';
 
 let client;
 

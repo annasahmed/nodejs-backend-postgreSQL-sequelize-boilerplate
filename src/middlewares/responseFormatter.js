@@ -1,4 +1,4 @@
-import logger from '../config/logger';  // Adjust path to your logger if necessary
+import logger from '../config/logger.js';  // Adjust path to your logger if necessary
 
 const responseFormatter = async ({ response }, next) => {
     try {

@@ -1,16 +1,14 @@
-import httpStatus from 'http-status'
-const { getOffset } = require('../utils/query');
-import ApiError from '../utils/ApiError';
-const { encryptData } = require('../utils/auth').default;
-const config = require('../config/config.js');
-import db from '../db/models'
-const roleService = require('./role.service');
-const { refactorCode } = require('../utils/globals.js');
-const { Op } = require('sequelize');
-import dayjs from 'dayjs'
-const { imageService } = require('./index');
-const { uploadToS3 } = require('./image.service');
-const { default: axios } = require('axios');
+import dayjs from 'dayjs';
+import httpStatus from 'http-status';
+import { Op } from 'sequelize';
+import config from '../config/config.js';
+import db from '../db/models/index.js';
+import ApiError from '../utils/ApiError.js';
+import { encryptData } from '../utils/auth.js';
+import { getOffset } from '../utils/query.js';
+import { uploadToS3 } from './image.service.js';
+import roleService from './role.service.js';
+
 
 async function getUserByEmail(email) {
 	const user = await db.user.findOne({

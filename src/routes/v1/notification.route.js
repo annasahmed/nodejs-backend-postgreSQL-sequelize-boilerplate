@@ -1,10 +1,10 @@
-const express = require('express');
-const { notificationController } = require('../../controllers');
-const {
+import express from 'express';
+import { notificationController } from '../../controllers/index.js';
+import {
 	validateCreateNotification,
 	validateUpdateNotification,
-} = require('../../validations/Notification/Notification.validation');
-const upload = require('../../middlewares/multerUpload');
+} from '../../validations/Notification/Notification.validation.js';
+import upload from '../../middlewares/multerUpload.js';
 
 const router = express.Router();
 

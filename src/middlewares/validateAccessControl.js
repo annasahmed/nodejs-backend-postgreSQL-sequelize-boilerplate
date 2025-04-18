@@ -1,6 +1,6 @@
 import httpStatus from 'http-status'
-const { roles } = require('../config/roles');
-import ApiError from '../utils/ApiError';
+import { roles } from '../config/roles.js';
+import ApiError from '../utils/ApiError.js';
 
 function grantAccess(action, resource) {
 	return async (req, _res, next) => {

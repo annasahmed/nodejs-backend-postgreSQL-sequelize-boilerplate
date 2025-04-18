@@ -1,15 +1,12 @@
-const express = require('express');
-const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const authValidation = require('../../validations/auth.validation');
-const {
-	userController,
-	authController,
-	userSavingsController,
-} = require('../../controllers');
-const { grantAccess } = require('../../middlewares/validateAccessControl');
-const { resources } = require('../../config/roles');
-const upload = require('../../middlewares/multerUpload');
+import express from 'express';
+import validate from '../../middlewares/validate.js';
+import { userValidation } from '../../validations/user.validation.js';
+import { authValidation } from '../../validations/auth.validation.js';
+import { userController, authController, userSavingsController } from '../../controllers/index.js';
+import { grantAccess } from '../../middlewares/validateAccessControl.js';
+import { resources } from '../../config/roles.js';
+import upload from '../../middlewares/multerUpload.js';
+
 
 const router = express.Router();
 

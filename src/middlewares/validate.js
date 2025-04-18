@@ -1,7 +1,7 @@
-const Joi = require('@hapi/joi');
+import Joi from '@hapi/joi';
 import httpStatus from 'http-status'
-const pick = require('../utils/pick');
-import ApiError from '../utils/ApiError';
+import pick from '../utils/pick.js';
+import ApiError from '../utils/ApiError.js';
 
 const validate = (schema) => (req, res, next) => {
 	const validSchema = pick(schema, ['params', 'query', 'body']);

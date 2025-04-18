@@ -1,8 +1,8 @@
-import httpStatus from 'http-status'
-const config = require('../config/config');
-const userService = require('./user.service');
-import ApiError from '../utils/ApiError';
-const { generateToken, generateExpires } = require('../utils/auth').default;
+import httpStatus from 'http-status';
+import config from '../config/config.js';
+import userService from './user.service.js';
+import ApiError from '../utils/ApiError.js';
+import { generateToken, generateExpires } from '../utils/auth.js';
 
 async function generateResetPasswordToken(email) {
 	const user = await userService.getUserByEmail(email);

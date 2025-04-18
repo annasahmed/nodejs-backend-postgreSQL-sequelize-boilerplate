@@ -138,10 +138,10 @@ Request data is validated using [Joi](https://hapi.dev/family/joi/). Check the [
 The validation schemas are defined in the `src/validations` directory and are used in the routes by providing them as parameters to the `validate` middleware.
 
 ```javascript
-const express = require('express');
-const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const userController = require('../../controllers/user.controller');
+import express from 'express';
+import validate from '../../middlewares/validate';
+import userValidation from '../../validations/user.validation';
+import userController from '../../controllers/user.controller';
 
 const router = express.Router();
 
@@ -158,7 +158,7 @@ To require authentication for certain routes, you can use `jwt` function at `con
 
 ```javascript
 // app.js
-const jwt = require('./config/jwt');
+import jwt from './config/jwt';
 
 app.use(jwt());
 ```
@@ -170,11 +170,11 @@ These routes require a valid JWT access token in the Authorization request heade
 The `auth` middleware is used to require certain rights/permissions to access a route.
 
 ```javascript
-const express = require('express');
-const { grantAccess } = require('../../middlewares/validateAccessControl');
-const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const userController = require('../../controllers/user.controller');
+import express from 'express';
+import { grantAccess } from '../../middlewares/validateAccessControl';
+import validate from '../../middlewares/validate';
+import userValidation from '../../validations/user.validation';
+import userController from '../../controllers/user.controller';
 
 const router = express.Router();
 
@@ -200,7 +200,7 @@ Import the logger from `src/utils/logger.js`. It is using the [Winston](https://
 Logging should be done according to the following severity levels (ascending order from most important to least important):
 
 ```javascript
-const logger = require('<path to src>/utils/logger');
+import logger from '<path to src>/utils/logger';
 
 logger.error('message'); // level 0
 logger.warn('message'); // level 1

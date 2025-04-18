@@ -1,11 +1,8 @@
-import httpStatus from 'http-status'
-const { getOffset } = require('../../../utils/query.js');
-const ApiError = require('../../../utils/ApiError.js');
-const { encryptData } = require('../../../utils/auth.js').default;
-const config = require('../../../config/config.js');
-const db = require('../../../db/models/index.js').default;
-const userService = require('../../user.service.js');
-const { refactorCode } = require('../../../utils/globals.js');
+import httpStatus from 'http-status';
+import config from '../../../config/config.js';
+import db from '../../../db/models/index.js';
+import ApiError from '../../../utils/ApiError.js';
+import { getOffset } from '../../../utils/query.js';
 
 async function getPageByTitle(title) {
 	const page = await db.page.findOne({

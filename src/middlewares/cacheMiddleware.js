@@ -1,5 +1,5 @@
 // middlewares/cacheMiddleware.js
-const redisClient = require('../config/redis');
+import redisClient from '../config/redis';
 
 // Middleware to check cache
 const checkCache = async (req, res, next) => {

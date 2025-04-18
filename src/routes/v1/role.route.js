@@ -1,8 +1,7 @@
-const express = require('express');
-const validate = require('../../middlewares/validate');
-const { roleValidation } = require('../../validations');
-const { roleController } = require('../../controllers');
-
+import express from 'express';
+import validate from '../../middlewares/validate.js';
+import { roleValidation } from '../../validations/index.js';
+import { roleController } from '../../controllers/index.js';
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-const Joi = require('@hapi/joi');
+import Joi from '@hapi/joi'
 
 const createNotification = Joi.object({
 	title: Joi.string().required(),

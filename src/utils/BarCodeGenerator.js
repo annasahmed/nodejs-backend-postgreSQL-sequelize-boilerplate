@@ -1,6 +1,5 @@
-const { uploadToS3 } = require('../services/image.service');
-
-const bwipjs = require('bwip-js');
+import { uploadToS3 } from '../services/image.service.js';
+import bwipjs from 'bwip-js';
 
 async function generateBarcode(text) {
 	return new Promise((resolve, reject) => {

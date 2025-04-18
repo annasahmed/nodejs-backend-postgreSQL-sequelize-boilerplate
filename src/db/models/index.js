@@ -1,10 +1,8 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-import fs from 'fs';
 import { basename as _basename } from 'path';
 import Sequelize from 'sequelize';
-
-const config = require(`${__dirname}/../../config/config`);
+import config from '../../config/config.js';
 
 const basename = _basename(module.filename);
 

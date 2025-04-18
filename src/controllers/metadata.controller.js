@@ -1,35 +1,27 @@
-import catchAsync from '../utils/catchAsync';
 import {
-	adminSubCategoryService,
-	adminCategoryService,
-	trendingService,
-	roleService,
-	adminEmirateService,
-	adminPlaceService,
-	adminDealService,
-	adminAreaService,
-	adminParentDealService,
-	adminHappeningBadgeService,
-	apiPlaceService,
-	apiInfoService,
-	apiCategoryService,
-	apiCuisineService,
-	apiUspService,
-	apiEmirateService,
-	apiCurrencyService,
-	permissionService,
-	apiAreaService,
 	adminappUserService,
-	apiPlatinumListService,
+	adminAreaService,
+	adminCategoryService,
+	adminCuisineService,
+	adminDealService,
+	adminEmirateService,
+	adminHappeningBadgeService,
+	adminParentDealService,
+	adminPlaceService,
 	adminPlatinumListService,
+	adminSubCategoryService,
+	adminUspService,
 	adminVendorService,
+	apiAreaService,
+	apiCategoryService,
+	apiCurrencyService,
+	apiInfoService,
+	permissionService,
+	roleService,
 	subscriptionService,
-} from '../services'
-import { adminCuisineService } from '../services'
-import { adminUspService } from '../services'
-import {
-	getAdminAffiliateCategories,
-} from './affiliates/platinumList.controler';
+	trendingService
+} from '../services/index.js';
+import catchAsync from '../utils/catchAsync.js';
 
 const getMetadata = catchAsync(async (req, res) => {
 	req.query.limit = 100000;

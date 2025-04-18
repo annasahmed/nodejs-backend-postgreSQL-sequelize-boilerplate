@@ -1,6 +1,6 @@
 import { sign, verify } from 'jsonwebtoken';
 import { genSalt, hash, compare } from 'bcrypt';
-import { jwt as _jwt } from '../config/config';
+import { jwt as _jwt } from '../config/config.js';
 
 function generateToken(data, expiresMs = null, secret = _jwt.secret) {
 	const payload = { ...data };

@@ -1,4 +1,4 @@
-const { SendMessageCommand, SQSClient } = require('@aws-sdk/client-sqs')
+import { SendMessageCommand, SQSClient } from '@aws-sdk/client-sqs'
 const QUEUE_URL = process.env.SQS_QUEUE_URL
 const sqsClient = new SQSClient({
   region: process.env.AWS_REGION,

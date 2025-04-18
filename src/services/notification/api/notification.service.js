@@ -1,6 +1,6 @@
-const { NOT_FOUND } = require('http-status');
-const db = require('../../../db/models').default;
-const ApiError = require('../../../utils/ApiError.js');
+import { NOT_FOUND } from 'http-status';
+import db from '../../../db/models/index.js';
+import ApiError from '../../../utils/ApiError.js';
 
 const getNotificationsByUserId = async (req, res) => {
 	const limit = req.query.limit ?? 10;

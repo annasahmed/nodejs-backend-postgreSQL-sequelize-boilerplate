@@ -1,8 +1,8 @@
 import http from 'http'
-import app from './app';
-import models from './db/models'
-import config from './config/config';
-import logger from './config/logger';
+import app from './app.js';
+import config from './config/config.js';
+import logger from './config/logger.js';
+import models from './db/models/index.js';
 
 // sync database
 models.sequelize.sync();

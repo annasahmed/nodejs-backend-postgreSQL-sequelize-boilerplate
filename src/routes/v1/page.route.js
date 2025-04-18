@@ -1,7 +1,5 @@
-const express = require('express');
-const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const { pageController } = require('../../controllers');
+import express from 'express';
+import { pageController } from '../../controllers/index.js';
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
 import redis from 'redis';
-import logger from './logger';
+import logger from './logger.js';
 
 const redisClient = redis.createClient({
 	url: process.env.REDIS_URL || 'redis://localhost:6379', // default URL for Redis

@@ -39,7 +39,7 @@ const deleteRole = {
 	}),
 };
 
-module.exports = {
+export default {
 	createRole,
 	getRoles,
 	getRole,

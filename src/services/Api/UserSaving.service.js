@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const ApiError = require("../../utils/ApiError");
 const db = require('../../db/models').default;
 
@@ -11,7 +11,7 @@ async function getUserSaving(req) {
 	}
 
 	return await db.deal_redemption.findOne({
-		where: {user_id: userId},
+		where: { user_id: userId },
 		attributes: [
 			[db.sequelize.fn('sum', db.sequelize.col('discount_amount')), 'total_savings'],
 			[db.sequelize.fn('sum', db.sequelize.col('total')), 'total_spent'],
@@ -32,8 +32,8 @@ async function getRecentRedemptions(req) {
 		throw new ApiError(httpStatus.UNAUTHORIZED, 'User not logged in');
 	}
 
-	const {count, rows} = await db.deal_redemption.findAndCountAll({
-		where: {user_id: userId},
+	const { count, rows } = await db.deal_redemption.findAndCountAll({
+		where: { user_id: userId },
 		order: [['id', 'DESC']],
 		include: [
 			{
@@ -52,7 +52,7 @@ async function getRecentRedemptions(req) {
 	};
 }
 
-module.exports = {
+export default {
 	getUserSaving,
 	getRecentRedemptions
 };

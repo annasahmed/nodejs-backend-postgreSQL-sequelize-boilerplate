@@ -2,9 +2,9 @@ const nodemailer = require('nodemailer');
 const config = require('../config/config');
 const logger = require('../config/logger');
 const aws = require('@aws-sdk/client-ses');
-const ApiError = require('../utils/ApiError');
-const httpStatus = require('http-status');
-const db = require('../db/models').default;
+import ApiError from '../utils/ApiError';
+import httpStatus from 'http-status'
+import db from '../db/models'
 const jwt = require('jsonwebtoken');
 const { accessKeyId, secretAccessKey, region } = config.s3Bucket;
 
@@ -72,12 +72,12 @@ const sendEmail = async (
 		ses: sesTags,
 		attachments: pdfPath
 			? [
-					{
-						filename: attachmentFilename || 'invoice.pdf',
-						content: pdfPath,
-						contentType: 'application/pdf',
-					},
-				]
+				{
+					filename: attachmentFilename || 'invoice.pdf',
+					content: pdfPath,
+					contentType: 'application/pdf',
+				},
+			]
 			: [],
 	};
 	await transporter.sendMail(msg);
@@ -251,7 +251,7 @@ const {
 	padNumber,
 	capitalizeString,
 } = require('../utils/globals');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 const { invoiceHtml } = require('../htmlFormats/invoice/invoiceFormat');
 const {
 	redemptionInvoiceFormat,
@@ -259,7 +259,7 @@ const {
 const { default: axios } = require('axios');
 const buffer = require('node:buffer');
 const { receiptFormat } = require('../htmlFormats/receipts/receiptFormat');
-const { generateToken } = require('../utils/auth');
+const { generateToken } = require('../utils/auth').default;
 
 const attachInvoiceFormat = async ({
 	invoiceNumber = '',
@@ -592,10 +592,10 @@ const sendWelcomeEmailVendor = async (to, placeName, username, password) => {
   <br/>
 	<br/>
 	Please use the following to access the portal` //   username: <b>${username}</b>
-	//   <br/>
-	//   password: <b>${password}</b>
+		//   <br/>
+		//   password: <b>${password}</b>
 
-	`	  <br/>
+		`	  <br/>
   <br/>
    <a href="${process.env.VENDOR_PORTAL_URL}/onboarding?token=${token}">
     <button style="padding: 8px;
@@ -681,11 +681,11 @@ const sendWelcomeEmailVendorWithOnbarding = async (
 	<br/>  
 <ul>  
     ${places
-		?.map(
-			(place) =>
-				`<li><b>${place.title}</b>: ${place.place_pin || '-'}</li>`,
-		)
-		.join('')}
+			?.map(
+				(place) =>
+					`<li><b>${place.title}</b>: ${place.place_pin || '-'}</li>`,
+			)
+			.join('')}
 </ul>  
 <br/>  
 If you haven't logged in before, use the following to access the portal
@@ -968,9 +968,8 @@ const websiteEnquiryEmail = async (data = {}) => {
 	<br/>
 	
 	<table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
-        ${
-			data.partner
-				? `<tr style="background-color: #f2f2f2;">
+        ${data.partner
+			? `<tr style="background-color: #f2f2f2;">
             <td style="border: 1px solid black; padding: 8px;">Business Name</td>
             <td style="border: 1px solid black; padding: 8px;">${data.business_name || ''}</td>
         </tr>
@@ -983,7 +982,7 @@ const websiteEnquiryEmail = async (data = {}) => {
             <td style="border: 1px solid black; padding: 8px;">${data.emirates || ''}</td>
         </tr>
 		`
-				: `<tr style="background-color: #f2f2f2;">
+			: `<tr style="background-color: #f2f2f2;">
             <td style="border: 1px solid black; padding: 8px;">Name</td>
             <td style="border: 1px solid black; padding: 8px;">${data.first_name || ''} ${data.last_name || ''}</td>
         </tr>
@@ -1011,7 +1010,7 @@ Dubai Daily Deal
 	await sendEmail('info@dubaidailydeals.app', subject, text);
 };
 
-module.exports = {
+export default {
 	sendEmail,
 	sendWelcomeEmail,
 	sendForgotPasswordEmail,

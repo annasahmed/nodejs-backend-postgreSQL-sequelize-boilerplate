@@ -1,10 +1,10 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
 const {
 	adminMonthlyDealService,
 	apiMonthlyDealService,
-} = require('../services');
+} from '../services'
 
 const getMonthlyDealById = catchAsync(async (req, res) => {
 	const monthlyDeal = await adminMonthlyDealService.getMonthlyDealById(
@@ -40,7 +40,7 @@ const updateMonthlyDeal = catchAsync(async (req, res) => {
 	const monthlyDeal = await adminMonthlyDealService.updateMonthlyDeal(req);
 	res.status(httpStatus.ACCEPTED).send({ monthlyDeal });
 });
-module.exports = {
+export default {
 	getMonthlyDeals,
 	addMonthlyDeal,
 	deleteMonthlyDeal,

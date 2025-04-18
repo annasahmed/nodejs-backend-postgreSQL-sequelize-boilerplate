@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
   up: async (queryInterface, Sequelize) => {
     const invoice = await queryInterface.describeTable('invoice')
     if (invoice.subscription_id) {
@@ -10,7 +10,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const invoice = await queryInterface.describeTable('invoice')
-    if (!invoice.subscription_id){
+    if (!invoice.subscription_id) {
       await queryInterface.addColumn('invoice', 'subscription_id', {
         type: Sequelize.BOOLEAN,
         allowNull: false,

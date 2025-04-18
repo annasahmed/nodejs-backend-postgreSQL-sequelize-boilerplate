@@ -127,7 +127,7 @@ const getPlacesBanner = async () => {
 	return banner;
 };
 
-module.exports = {
+export default {
 	getPlaces,
 	getPlacesByCategory,
 	getPlacesBanner,

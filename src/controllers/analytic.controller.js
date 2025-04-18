@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const { apiAnalyticService, adminAnalyticService } = require('../services');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+const { apiAnalyticService, adminAnalyticService } from '../services'
 
 const addAnalytic = catchAsync(async (req, res) => {
 	const analytic = await apiAnalyticService.createAnalytic(req);
@@ -11,7 +11,7 @@ const getAnalytic = catchAsync(async (req, res) => {
 	res.send({ analytic });
 });
 
-module.exports = {
+export default {
 	addAnalytic,
 	getAnalytic,
 };

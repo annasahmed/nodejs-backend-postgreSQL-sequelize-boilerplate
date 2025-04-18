@@ -44,4 +44,4 @@ router.route('/catTiming').post(checkController.createDaysCategory);
 // 		placeController.updatePlace,
 // 	);
 
-module.exports = router;
+export default router;

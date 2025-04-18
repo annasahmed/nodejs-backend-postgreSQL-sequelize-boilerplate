@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query.js');
 const ApiError = require('../../../utils/ApiError.js');
-const { encryptData, verifyToken } = require('../../../utils/auth.js');
+const { encryptData, verifyToken } = require('../../../utils/auth.js').default;
 const config = require('../../../config/config.js');
 const db = require('../../../db/models/index.js').default;
 const userService = require('../../user.service');
@@ -90,11 +90,11 @@ async function createUsp(req) {
 			await Promise.all(
 				categoryIdsArr?.length
 					? categoryIdsArr?.map((categoryId) => {
-							return db.usp_to_subcategory.create({
-								uspId: id,
-								subCategoryId: categoryId,
-							});
-						})
+						return db.usp_to_subcategory.create({
+							uspId: id,
+							subCategoryId: categoryId,
+						});
+					})
 					: [],
 			);
 
@@ -202,17 +202,17 @@ async function updateUsp(req) {
 			const id = req.params.uspId || req.body.id;
 			const deleteCatId = categoryIdsArr?.length
 				? await db.usp_to_subcategory.destroy({
-						where: { usp_id: id },
-					})
+					where: { usp_id: id },
+				})
 				: null;
 			await Promise.all(
 				categoryIdsArr?.length
 					? categoryIdsArr?.map((categoryId) => {
-							return db.usp_to_subcategory.create({
-								uspId: id,
-								subCategoryId: categoryId,
-							});
-						})
+						return db.usp_to_subcategory.create({
+							uspId: id,
+							subCategoryId: categoryId,
+						});
+					})
 					: [],
 			);
 			return data[1];
@@ -221,7 +221,7 @@ async function updateUsp(req) {
 	return updatedUsp;
 }
 
-module.exports = {
+export default {
 	getUsps,
 	createUsp,
 	deleteUspById,

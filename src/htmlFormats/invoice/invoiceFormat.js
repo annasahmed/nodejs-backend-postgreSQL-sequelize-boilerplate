@@ -286,4 +286,4 @@ const invoiceHtml = `
 </html>
 `;
 
-module.exports = { invoiceHtml };
+export default { invoiceHtml };

@@ -1,8 +1,8 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const config = require('../config/config');
 const userService = require('./user.service');
-const ApiError = require('../utils/ApiError');
-const { generateToken, generateExpires } = require('../utils/auth');
+import ApiError from '../utils/ApiError';
+const { generateToken, generateExpires } = require('../utils/auth').default;
 
 async function generateResetPasswordToken(email) {
 	const user = await userService.getUserByEmail(email);
@@ -45,7 +45,7 @@ async function generateAuthTokens({ userId, roleId = '' }) {
 	};
 }
 
-module.exports = {
+export default {
 	generateResetPasswordToken,
 	generateAuthTokens,
 };

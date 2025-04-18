@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query');
 const ApiError = require('../../../utils/ApiError');
 const config = require('../../../config/config.js');
@@ -110,7 +110,7 @@ async function deletePackageById(SubscriptionId) {
 	// }
 	// return deletedSubscription;
 }
-module.exports = {
+export default {
 	getSubscriptionById: getpackageById,
 	getSubscriptions: getPackages,
 	createSubscription: createPackage,

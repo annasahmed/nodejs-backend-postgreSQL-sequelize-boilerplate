@@ -1,12 +1,12 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const {
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
+import {
 	apiInfoService,
 	adminInfoService,
 	imageService,
-} = require('../services');
-const dayjs = require('dayjs');
+} from '../services'
+import dayjs from 'dayjs'
 
 const getInfos = catchAsync(async (req, res) => {
 	const clientId = req.headers['clientid'] === 'cms';
@@ -57,7 +57,7 @@ const updateInfo = catchAsync(async (req, res) => {
 	const info = await adminInfoService.updateInfo(req);
 	res.status(httpStatus.ACCEPTED).send({ info });
 });
-module.exports = {
+export default {
 	getInfos,
 	addInfo,
 	deleteInfo,

@@ -1,9 +1,9 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
 const {
 	dealRedemptionService,
 	adminDealRedemptionService,
-} = require('../services');
+} from '../services'
 const { DealRedemptionTransformer } = require('../transformers');
 
 const redeemDeal = catchAsync(async (req, res) => {
@@ -25,7 +25,7 @@ const deleteRedemptionsByPlaceIdChk = catchAsync(async (req, res) => {
 	res.status(httpStatus.ACCEPTED).send({ deal, chk: true });
 });
 
-module.exports = {
+export default {
 	redeemDeal,
 	deleteRedemptionsByPlaceId,
 	deleteRedemptionsByPlaceIdChk,

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		// Create the 'new_table' table
 		await queryInterface.createTable('place_to_usp', {});

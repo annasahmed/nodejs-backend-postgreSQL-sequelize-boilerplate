@@ -14,4 +14,4 @@ router.route('/vendors').get(reportController.vendorReport);
 router.route('/general').get(reportController.homepageReport);
 router.route('/happenings').get(reportController.getExpiringHappenings);
 
-module.exports = router;
+export default router;

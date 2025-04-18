@@ -57,7 +57,7 @@ const seasonId = {
   }),
 };
 
-module.exports = {
+export default {
   createSeason,
   updateSeason,
   seasonId,

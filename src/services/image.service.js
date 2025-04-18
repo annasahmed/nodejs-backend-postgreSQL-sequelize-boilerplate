@@ -288,7 +288,7 @@ function generateNewKey(originalKey) {
 	return `${basename}_map${extname}`; // Append _map to file name
 }
 
-module.exports = {
+export default {
 	uploadImageToS3,
 	uploadImageToS3Unix,
 	deleteImageFromS3,

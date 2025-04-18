@@ -15,4 +15,4 @@ const verifyStripeSignature = (req, res, next) => {
 	}
 };
 
-module.exports = verifyStripeSignature;
+export default verifyStripeSignature;

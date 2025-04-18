@@ -17,4 +17,4 @@ router
 	.delete(permissionController.deletePermissions)
 	.patch(permissionController.updatePermissionById);
 
-module.exports = router;
+export default router;

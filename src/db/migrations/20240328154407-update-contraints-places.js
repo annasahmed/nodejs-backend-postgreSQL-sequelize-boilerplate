@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		// Drop the existing foreign key constraint
 		await queryInterface.removeConstraint(

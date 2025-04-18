@@ -1,7 +1,7 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
 const userValidation = require('../../validations/user.validation');
-const {pageController} = require('../../controllers');
+const { pageController } = require('../../controllers');
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router
 	.delete(pageController.deletePage)
 	.patch(pageController.updatePage);
 
-module.exports = router;
+export default router;

@@ -3,7 +3,7 @@
 const { default: axios } = require('axios');
 const db = require('../models').default;
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		const areas = [];
 		const provider = 'platinumlist';
@@ -28,5 +28,5 @@ module.exports = {
 		await db.affiliate_area.bulkCreate(areas);
 	},
 
-	down: async (queryInterface, Sequelize) => {},
+	down: async (queryInterface, Sequelize) => { },
 };

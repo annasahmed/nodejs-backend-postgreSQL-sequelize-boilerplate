@@ -131,7 +131,7 @@ async function getTotalUnpaidInvoicesByVendor(req) {
 	return { vendorId, totalUnpaidAmount: totalUnpaidAmount || 0 };
 }
 
-module.exports = {
+export default {
 	getInvoicesByVendor,
 	getRedemptionsByVendor,
 	getTotalRedemptionAmountByVendor,

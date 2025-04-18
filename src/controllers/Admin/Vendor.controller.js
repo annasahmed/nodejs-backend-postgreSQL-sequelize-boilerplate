@@ -1,12 +1,12 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../../utils/catchAsync');
-const {
+import httpStatus from 'http-status'
+import catchAsync from '../../utils/catchAsync'
+import {
 	adminVendorService,
 	vendorInvoiceService,
 	adminInvoiceService,
-} = require('../../services');
-const ApiError = require('../../utils/ApiError');
-const { stripeService } = require('../../services/Admin');
+} from '../../services'
+import ApiError from '../../utils/ApiError'
+import stripeService from '../../services/Admin'
 
 // Get vendor by ID
 const getVendorById = catchAsync(async (req, res) => {
@@ -101,7 +101,7 @@ const sendOnbaordingEmail = catchAsync(async (req, res) => {
 	});
 });
 
-module.exports = {
+export default {
 	getVendors,
 	getVendorById,
 	addVendor,

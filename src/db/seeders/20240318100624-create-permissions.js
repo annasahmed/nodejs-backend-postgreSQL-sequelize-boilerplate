@@ -3,7 +3,7 @@
 const { createPermission } = require('../../services/permission.service');
 
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
+export default {
 	async up(queryInterface, Sequelize) {
 		const parents = [
 			'users',
@@ -24,7 +24,7 @@ module.exports = {
 					parent,
 				},
 			};
-			await createPermission(req,true);
+			await createPermission(req, true);
 		}
 		// return queryInterface.bulkInsert('role', [
 		// 	// {

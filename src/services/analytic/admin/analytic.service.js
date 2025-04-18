@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const ApiError = require('../../../utils/ApiError');
 const db = require('../../../db/models').default;
 
@@ -63,7 +63,7 @@ async function countAnalytics(event, placeId) {
 	return analytic;
 }
 
-module.exports = {
+export default {
 	getAnalytics,
 	countAnalytics,
 };

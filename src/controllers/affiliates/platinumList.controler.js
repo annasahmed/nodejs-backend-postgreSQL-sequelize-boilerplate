@@ -1,10 +1,10 @@
-const catchAsync = require('../../utils/catchAsync');
+import catchAsync from '../../utils/catchAsync'
 const {
 	apiPlatinumListService,
 	adminPlatinumListService,
 	imageService,
-} = require('../../services');
-const httpStatus = require('http-status');
+} from '../../services'
+import httpStatus from 'http-status'
 
 // api
 
@@ -73,7 +73,7 @@ const updateAffiliateCategory = catchAsync(async (req, res) => {
 	res.status(httpStatus.ACCEPTED).send({ affiliateCategory });
 });
 
-module.exports = {
+export default {
 	getEvents,
 	getAdminAffiliateCategories,
 	getApiAffiliateCategories,

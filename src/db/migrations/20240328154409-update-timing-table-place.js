@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		// Step 1: Retrieve all place IDs from the places table
 		const places = await queryInterface.sequelize.query(

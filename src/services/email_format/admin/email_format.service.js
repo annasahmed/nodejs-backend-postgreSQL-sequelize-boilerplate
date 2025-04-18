@@ -136,17 +136,17 @@
 // 	await sendEmail(to, subject, text);
 // };
 
-// module.exports = {
+// export default {
 
 // 	sendForgotPasswordEmail,
 // 	sendInvoiceEmail,
 // 	sendOTPEmailVerification,
 // };
 
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query');
 const ApiError = require('../../../utils/ApiError');
-const { encryptData } = require('../../../utils/auth');
+const { encryptData } = require('../../../utils/auth').default;
 const config = require('../../../config/config.js');
 const db = require('../../../db/models').default;
 const userService = require('../../user.service');
@@ -252,7 +252,7 @@ async function updateEmailFormats(req) {
 	return updatedEmailFormat;
 }
 
-module.exports = {
+export default {
 	createEmailFormat,
 	updateEmailFormats,
 	getEmailFormats,

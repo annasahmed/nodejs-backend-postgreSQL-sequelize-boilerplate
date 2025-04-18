@@ -1,11 +1,11 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
 const {
 	adminUspService,
 	imageService,
 	adminPlaceService,
-} = require('../services');
+} from '../services'
 const { getOffset } = require('../utils/query');
 
 const addImage = catchAsync(async (req, res) => {
@@ -42,7 +42,7 @@ const resizeImage = catchAsync(async (req, res) => {
 	res.status(httpStatus.ACCEPTED).send({ successImages, errorImages });
 });
 
-module.exports = {
+export default {
 	addImage,
 	moveImage,
 	resizeImage,

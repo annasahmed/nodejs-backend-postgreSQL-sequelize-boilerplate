@@ -1,11 +1,11 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
 const {
 	adminDealService,
 	imageService,
 	apiDealService,
-} = require('../services');
+} from '../services'
 
 const getDeals = catchAsync(async (req, res) => {
 	const clientId = await req.headers['clientid'];
@@ -29,7 +29,7 @@ const updateDeal = catchAsync(async (req, res) => {
 	const deal = await adminDealService.updateDeal(req);
 	res.status(httpStatus.ACCEPTED).send({ deal });
 });
-module.exports = {
+export default {
 	getDeals,
 	addDeal,
 	deleteDeal,

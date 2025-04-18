@@ -19,4 +19,4 @@ router
 		infoController.updateInfo,
 	);
 
-module.exports = router;
+export default router;

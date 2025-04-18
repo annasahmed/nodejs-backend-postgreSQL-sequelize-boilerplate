@@ -13,14 +13,13 @@ export default (sequelize, DataTypes) => {
         allowNull: false,
       },
       description: {
-        type: DataTypes.TEXT, // Corrected DataTypes.Text to DataTypes.TEXT
+        type: DataTypes.TEXT,
         allowNull: false,
         defaultValue: '',
       },
       image: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: '',
       },
       place_id: {
         type: DataTypes.INTEGER,

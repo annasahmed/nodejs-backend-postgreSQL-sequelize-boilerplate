@@ -1,11 +1,11 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
 const {
 	adminUspService,
 	apiUspService,
 	packagesService,
-} = require('../services');
+} from '../services'
 
 const getPackages = catchAsync(async (req, res) => {
 	const packages = await packagesService.getPackages(req);
@@ -25,7 +25,7 @@ const updateUsp = catchAsync(async (req, res) => {
 	const usp = await adminUspService.updateUsp(req);
 	res.status(httpStatus.ACCEPTED).send({ usp });
 });
-module.exports = {
+export default {
 	getUsps,
 	addUsp,
 	deleteUsp,

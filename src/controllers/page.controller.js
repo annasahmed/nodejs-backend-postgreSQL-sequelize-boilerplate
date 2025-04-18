@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { apiPageService, adminPageService } = require('../services');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
+const { apiPageService, adminPageService } from '../services'
 
 const getPageById = catchAsync(async (req, res) => {
 	const page = await apiPageService.getPageById(req.params.pageId);
@@ -9,7 +9,7 @@ const getPageById = catchAsync(async (req, res) => {
 });
 const getPages = catchAsync(async (req, res) => {
 	const clientId = req.headers['clientid'] === 'cms';
-	const pages = clientId?await adminPageService.getPages(req): await apiPageService.getPages(req);
+	const pages = clientId ? await adminPageService.getPages(req) : await apiPageService.getPages(req);
 	res.send({ pages });
 });
 
@@ -26,7 +26,7 @@ const updatePage = catchAsync(async (req, res) => {
 	const page = await adminPageService.updatePage(req);
 	res.status(httpStatus.ACCEPTED).send({ page });
 });
-module.exports = {
+export default {
 	getPages,
 	getPageById,
 	addPage,

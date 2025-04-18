@@ -1,5 +1,5 @@
-const catchAsync = require('../utils/catchAsync');
-const { adminCategoryService } = require('../services');
+import catchAsync from '../utils/catchAsync';
+const { adminCategoryService } from '../services'
 
 const addCategory = catchAsync(async (req, res) => {
 	const categories = await adminCategoryService.createCategory(req);
@@ -11,7 +11,7 @@ const getCategories = catchAsync(async (req, res) => {
 	res.send({ categories });
 });
 
-module.exports = {
+export default {
 	addCategory,
 	getCategories,
 };

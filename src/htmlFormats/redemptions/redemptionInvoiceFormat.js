@@ -1,5 +1,5 @@
 const { numberToWords } = require('../../utils/globals');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 const redemptionInvoiceFormat = (vendor, records, data) => {
 	let total = 0;
 	let discount = 0;
@@ -407,4 +407,4 @@ const redemptionInvoiceFormat = (vendor, records, data) => {
 	return html;
 };
 
-module.exports = { redemptionInvoiceFormat };
+export default { redemptionInvoiceFormat };

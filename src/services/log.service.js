@@ -27,6 +27,6 @@ async function getLogs(req) {
 	return logs;
 }
 
-module.exports = {
+export default {
 	getLogs,
 };

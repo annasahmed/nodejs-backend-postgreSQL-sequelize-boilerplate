@@ -1,7 +1,7 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
+export default {
 	async up(queryInterface, Sequelize) {
 		const tableDescription = await queryInterface.describeTable('deal');
 		if (!tableDescription['end_date']) {

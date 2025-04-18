@@ -1,8 +1,8 @@
-const http = require('http');
-const app = require('./app');
-const models = require('./db/models').default;
-const config = require('./config/config');
-const logger = require('./config/logger');
+import http from 'http'
+import app from './app';
+import models from './db/models'
+import config from './config/config';
+import logger from './config/logger';
 
 // sync database
 models.sequelize.sync();

@@ -1,8 +1,8 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../utils/query');
-const ApiError = require('../utils/ApiError');
+import ApiError from '../utils/ApiError';
 const config = require('../config/config.js');
-const db = require('../db/models').default;
+import db from '../db/models'
 
 async function getRoleById(roleId) {
 	const permission = await db.permission.findOne({
@@ -82,12 +82,12 @@ async function getRoles(req) {
 	return roles;
 }
 
-async function createPermission(req,skipOnExist=false) {
+async function createPermission(req, skipOnExist = false) {
 	const { parent } = req.body;
 	const existedPermission = await getPermissionByParent(parent);
 
 	if (existedPermission) {
-		if (skipOnExist){
+		if (skipOnExist) {
 			return;
 		}
 		throw new ApiError(
@@ -158,7 +158,7 @@ async function getPermissionByRoleId(roleId) {
 
 	return allowedRoutes;
 }
-module.exports = {
+export default {
 	createPermission,
 	getPermissionGroupByParent,
 	getPermissionByRoleId,

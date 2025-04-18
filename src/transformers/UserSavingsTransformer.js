@@ -8,4 +8,4 @@ class UserSavingsTransformer {
 	}
 }
 
-module.exports = new UserSavingsTransformer();
+export default new UserSavingsTransformer();

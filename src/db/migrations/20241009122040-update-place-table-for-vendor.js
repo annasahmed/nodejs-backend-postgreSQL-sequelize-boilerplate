@@ -2,8 +2,8 @@
 
 const db = require('../models').default
 const { Op } = require('sequelize')
-module.exports = {
-  async up (queryInterface, Sequelize) {
+export default {
+  async up(queryInterface, Sequelize) {
 
 
     const place = await queryInterface.describeTable('place')
@@ -37,33 +37,33 @@ module.exports = {
       }
     });
     for (const place1 of places) {
-      if (!place1.email){
+      if (!place1.email) {
         continue;
       }
       const vendorExist = await db.vendors.findOne({
-        where:{
+        where: {
           name: place1.title,
         }
       })
       console.log(place1.title)
-      if (vendorExist){
+      if (vendorExist) {
         await place1.update({
-          vendor_id:vendorExist.id
+          vendor_id: vendorExist.id
         })
-      }else{
+      } else {
         const result = await db.vendors.create({
-          name:place1.title,
-          email:place1.email,
-          username:place1.username,
-          password:place1.password,
-          contact_person_name:place1.name,
-          trn_number:place1.trn,
-          start_date:place1.start_date,
-          grace_period:place1.grace_period,
-          status:place1.status,
+          name: place1.title,
+          email: place1.email,
+          username: place1.username,
+          password: place1.password,
+          contact_person_name: place1.name,
+          trn_number: place1.trn,
+          start_date: place1.start_date,
+          grace_period: place1.grace_period,
+          status: place1.status,
         }).then((resultEntity) => resultEntity.get({ plain: true }))
         await place1.update({
-          vendor_id:result.id
+          vendor_id: result.id
         })
       }
     }
@@ -74,7 +74,7 @@ module.exports = {
     }
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     const place = await queryInterface.describeTable('place')
     const toAdd = [
       {

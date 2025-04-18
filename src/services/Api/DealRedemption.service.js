@@ -1,10 +1,10 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const ApiError = require('../../utils/ApiError.js');
 const db = require('../../db/models').default;
 const { padId } = require('../../utils/globals');
 const { adminappUserService } = require('../index');
 const { generateBarCode } = require('../../utils/BarCodeGenerator');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 const { Op } = require('sequelize');
 
 async function redeemDeal(req) {
@@ -137,6 +137,6 @@ async function redeemDeal(req) {
 	});
 }
 
-module.exports = {
+export default {
 	redeemDeal,
 };

@@ -1,32 +1,28 @@
-// const express = require('express');
 import express from 'express';
-const helmet = require('helmet');
-const xss = require('xss-clean');
-const compression = require('compression');
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
-const httpStatus = require('http-status');
-const { postgres } = require('./config/postgres');
-const config = require('./config/config');
-const morgan = require('./config/morgan');
-const jwt = require('./config/jwt');
-const { authLimiter } = require('./middlewares/rateLimiter');
-const routes = require('./routes/v1');
-const { errorConverter, errorHandler } = require('./middlewares/error');
-const ApiError = require('./utils/ApiError');
-const { validateRoles } = require('./middlewares/validateRoles');
-const {
-	disabledPastHappenings,
-	disabledPastDeals,
-	sendRedemptionInvoices,
-	sendScheduledNotification,
-} = require('./utils/cron'); // Adjust the path to your cron file
-const redisClient = require('./config/redis');
-const db = require('./db/models').default;
-const { Op } = require('sequelize');
-const stripe = require('./config/stripe');
-const dayjs = require('dayjs');
-require('dotenv').config();
+import responseFormatter from './middlewares/responseFormatter';
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import compression from 'compression';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import httpStatus from 'http-status';
+import { postgres } from './config/postgres';
+import config from './config/config';
+import morgan from './config/morgan';
+import jwt from './config/jwt';
+import { authLimiter } from './middlewares/rateLimiter';
+import routes from './routes/v1';
+import { errorConverter, errorHandler } from './middlewares/error';
+import ApiError from './utils/ApiError';
+import { validateRoles } from './middlewares/validateRoles';
+import { disabledPastHappenings, sendRedemptionInvoices, sendScheduledNotification } from './utils/cron';
+import redisClient from './config/redis';
+import db from './db/models';
+import stripe from './config/stripe';
+import dayjs from 'dayjs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 const app = express();
 
 if (config.env !== 'test') {
@@ -106,6 +102,9 @@ app.use((req, res, next) => {
 	next(new ApiError(httpStatus.NOT_FOUND, 'Route Not found'));
 });
 
+
+app.use(responseFormatter);
+
 // convert error to ApiError, if needed
 app.use(errorConverter);
 
@@ -117,4 +116,4 @@ disabledPastHappenings.start();
 sendRedemptionInvoices.start();
 sendScheduledNotification.start();
 
-module.exports = app;
+export default app;

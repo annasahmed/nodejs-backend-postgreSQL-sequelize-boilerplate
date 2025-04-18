@@ -1,6 +1,6 @@
-const ApiError = require('./ApiError');
-const httpStatus = require('http-status');
-const { verifyToken } = require('./auth');
+import ApiError from './ApiError';
+import httpStatus from 'http-status'
+import { verifyToken } from './auth';
 
 const getMultipleincludes = async (arr, dbArray) => {
 	for (const item of arr.rows) {
@@ -45,19 +45,19 @@ function findCommonElements(arrays) {
 	}, []);
 }
 // const db = require('../db/models');
-const db = require('../db/models').default;
+import db from '../db/models'
 const { Op, where } = require('sequelize');
 const Sequelize = require('sequelize');
 
 const searchIds = (id) => {
 	return id
 		? {
-				[Op.or]: [
-					{
-						id: parseInt(id) || null,
-					},
-				],
-			}
+			[Op.or]: [
+				{
+					id: parseInt(id) || null,
+				},
+			],
+		}
 		: {};
 };
 
@@ -404,12 +404,12 @@ const searchManytoManyTitle = async (uspId, usp_id, database) => {
 		let placeIdsWithUsps;
 		const searchCondition = uspId
 			? {
-					[Op.or]: [
-						{
-							[usp_id]: { [Op.iLike]: `%${uspId}%` },
-						},
-					],
-				}
+				[Op.or]: [
+					{
+						[usp_id]: { [Op.iLike]: `%${uspId}%` },
+					},
+				],
+			}
 			: {};
 
 		placeIdsWithUsps = await db[database].findAll({
@@ -608,9 +608,9 @@ const nearByCondition = (latitude, longitude) => {
 		locationCondition.longitude = {
 			[Op.between]: [
 				longitude -
-					radius / (111.12 * Math.cos((latitude * Math.PI) / 180)),
+				radius / (111.12 * Math.cos((latitude * Math.PI) / 180)),
 				longitude +
-					radius / (111.12 * Math.cos((latitude * Math.PI) / 180)),
+				radius / (111.12 * Math.cos((latitude * Math.PI) / 180)),
 			],
 		};
 	}
@@ -631,9 +631,9 @@ const getDistance = (lat1, lon1, lat2, lon2) => {
 	const a =
 		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
 		Math.cos(toRadians(lat1)) *
-			Math.cos(toRadians(lat2)) *
-			Math.sin(dLon / 2) *
-			Math.sin(dLon / 2);
+		Math.cos(toRadians(lat2)) *
+		Math.sin(dLon / 2) *
+		Math.sin(dLon / 2);
 
 	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
@@ -981,7 +981,7 @@ const getDisplayTime = async (place) => {
 	}
 };
 
-module.exports = {
+export {
 	refactorCode,
 	searchIds,
 	searchManytoMany,

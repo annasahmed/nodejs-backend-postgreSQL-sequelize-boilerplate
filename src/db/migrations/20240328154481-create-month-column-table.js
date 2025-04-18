@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		await queryInterface.addColumn('packages', 'month', {
 			type: Sequelize.FLOAT,

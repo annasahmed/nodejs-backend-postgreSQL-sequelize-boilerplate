@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 const db = require('../../../db/models').default;
 const Sequelize = require('sequelize');
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 
 const {
 	refactorCode,
@@ -10,7 +10,7 @@ const {
 } = require('../../../utils/globals.js');
 const { sendEmail } = require('../../email.service.js');
 const ApiError = require('../../../utils/ApiError');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 
 async function checkVendorById(id) {
 	return await db.vendors.findOne({
@@ -385,7 +385,7 @@ const signContract = async (req) => {
 	return await getContract(vendorId);
 };
 
-module.exports = {
+export default {
 	getVendorById,
 	getVendorByEmail,
 	getVendorByUsername,

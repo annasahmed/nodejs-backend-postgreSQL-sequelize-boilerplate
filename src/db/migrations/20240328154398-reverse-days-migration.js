@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		const tableDescription = await queryInterface.describeTable(
 			'place_to_subcategory',
@@ -29,5 +29,5 @@ module.exports = {
 		}
 	},
 
-	down: async (queryInterface, Sequelize) => {},
+	down: async (queryInterface, Sequelize) => { },
 };

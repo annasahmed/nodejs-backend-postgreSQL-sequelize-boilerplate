@@ -1,5 +1,5 @@
 const { webistePlaceservice } = require('../../services/Website');
-const catchAsync = require('../../utils/catchAsync');
+import catchAsync from '../../utils/catchAsync'
 
 const getPlaces = catchAsync(async (req, res) => {
 	const places = await webistePlaceservice.getPlaces(req);
@@ -16,7 +16,7 @@ const getPlacesBanner = catchAsync(async (req, res) => {
 	res.send({ banner });
 });
 
-module.exports = {
+export default {
 	getPlacesBanner,
 	getPlaces,
 	getPlacesByCategory,

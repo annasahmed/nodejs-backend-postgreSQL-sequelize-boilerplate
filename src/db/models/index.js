@@ -45,4 +45,4 @@ db.sequelize = sequelize;
 // db.Sequelize = Sequelize;
 
 export default db;
-// module.exports = { db, sequelize, dropAllTables };
+// export default { db, sequelize, dropAllTables };

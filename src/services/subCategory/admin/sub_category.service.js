@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query.js');
 const ApiError = require('../../../utils/ApiError.js');
-const { encryptData } = require('../../../utils/auth.js');
+const { encryptData } = require('../../../utils/auth.js').default;
 const config = require('../../../config/config.js');
 const db = require('../../../db/models/index.js').default;
 const userService = require('../../user.service.js');
@@ -231,13 +231,13 @@ async function attachSubCategoriesToPlaceWebsite(req, cms) {
 	const places = await Promise.all(
 		placeIdsArr?.length
 			? placeIdsArr?.map(async (placeId) => {
-					const chk = await db.place_to_subcategory_website.create({
-						placeId: placeId,
-						subCategoryId: id,
-					});
-					console.log({ chk }, 'chhking chkk');
-					return chk;
-				})
+				const chk = await db.place_to_subcategory_website.create({
+					placeId: placeId,
+					subCategoryId: id,
+				});
+				console.log({ chk }, 'chhking chkk');
+				return chk;
+			})
 			: [],
 	);
 	// const createdSubCategory = await db.placeToSubcategoryWebsite
@@ -297,7 +297,7 @@ async function updateSubCategory(req) {
 	return updatedCategory;
 }
 
-module.exports = {
+export default {
 	getSubCategories,
 	getSubCategoriesWebsite,
 	attachSubCategoriesToPlaceWebsite,

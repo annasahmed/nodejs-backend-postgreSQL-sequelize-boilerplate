@@ -1,6 +1,6 @@
-const { Client } = require('pg');
-const config = require('./config');
-const logger = require('./logger');
+import { Client } from 'pg'
+import config from './config';
+import logger from './logger';
 
 let client;
 
@@ -16,6 +16,6 @@ let client;
 	}
 })();
 
-module.exports = {
+export default {
 	postgres: client,
 };

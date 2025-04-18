@@ -544,11 +544,11 @@ async function getFilteredPlaces(req) {
 	const daysCondition = categoryId
 		? day
 			? await searchManytoManyDays(
-					[day],
-					'days',
-					'place_to_subcategory',
-					categoryId,
-				)
+				[day],
+				'days',
+				'place_to_subcategory',
+				categoryId,
+			)
 			: {}
 		: await searchManytoManyDaysFilters(day, 'day', 'timing');
 	const locationCondition = {};
@@ -562,9 +562,9 @@ async function getFilteredPlaces(req) {
 		locationCondition.longitude = {
 			[Op.between]: [
 				longitude -
-					radius / (111.12 * Math.cos((latitude * Math.PI) / 180)),
+				radius / (111.12 * Math.cos((latitude * Math.PI) / 180)),
 				longitude +
-					radius / (111.12 * Math.cos((latitude * Math.PI) / 180)),
+				radius / (111.12 * Math.cos((latitude * Math.PI) / 180)),
 			],
 		};
 	}
@@ -661,56 +661,56 @@ async function getFilteredPlaces(req) {
 						await Promise.all(
 							res
 								? res?.map(async (subCategory, index) => {
-										let uspsOfSubcategory =
-											await db.usp_to_subcategory.findAll(
-												{
-													where: {
-														sub_category_id:
-															subCategory.id,
-													},
-													// group: ['usp_id'],
-													raw: true,
-												},
-											);
-										const usps =
-											await db.place_to_usp.count({
+									let uspsOfSubcategory =
+										await db.usp_to_subcategory.findAll(
+											{
 												where: {
-													usp_id: uspsOfSubcategory.map(
-														(item) => item.uspId,
-													),
-													place_id: placeIds,
-													// ...searchObj,
+													sub_category_id:
+														subCategory.id,
 												},
-												group: ['usp_id'],
+												// group: ['usp_id'],
 												raw: true,
-											});
-										res[index].places = usps.count;
-										const uspsArr = await db.usp.findAll({
-											where: {
-												id: usps?.map(
-													(item) => item.usp_id,
-												),
 											},
-											attributes: ['id', 'title'],
+										);
+									const usps =
+										await db.place_to_usp.count({
+											where: {
+												usp_id: uspsOfSubcategory.map(
+													(item) => item.uspId,
+												),
+												place_id: placeIds,
+												// ...searchObj,
+											},
+											group: ['usp_id'],
 											raw: true,
 										});
-										const uspsWithPlaces = uspsArr.map(
-											(usp) => ({
-												...usp,
-												places:
-													usps?.find(
-														(row) =>
-															row.usp_id ===
-															usp.id,
-													)?.count || 0,
-											}),
-										);
-										// res[index].places = usps;
-										res[index].usps = uspsWithPlaces.sort(
-											(a, b) => b.places - a.places,
-										);
-										// res[index].usps = uspsWithPlaces;
-									})
+									res[index].places = usps.count;
+									const uspsArr = await db.usp.findAll({
+										where: {
+											id: usps?.map(
+												(item) => item.usp_id,
+											),
+										},
+										attributes: ['id', 'title'],
+										raw: true,
+									});
+									const uspsWithPlaces = uspsArr.map(
+										(usp) => ({
+											...usp,
+											places:
+												usps?.find(
+													(row) =>
+														row.usp_id ===
+														usp.id,
+												)?.count || 0,
+										}),
+									);
+									// res[index].places = usps;
+									res[index].usps = uspsWithPlaces.sort(
+										(a, b) => b.places - a.places,
+									);
+									// res[index].usps = uspsWithPlaces;
+								})
 								: [],
 							places.subCategories.push(...res),
 						);
@@ -835,31 +835,31 @@ async function getPlaces(req) {
 			.replace(/"/g, '');
 	const searchCondition = search
 		? {
-				[Op.or]: [
-					{
-						slug: {
-							[Op.iLike]: `${searchKeyword}`,
-						},
+			[Op.or]: [
+				{
+					slug: {
+						[Op.iLike]: `${searchKeyword}`,
 					},
-					{
-						slug: {
-							[Op.iLike]: `${searchKeyword}%`,
-						},
+				},
+				{
+					slug: {
+						[Op.iLike]: `${searchKeyword}%`,
 					},
-					{
-						slug: {
-							[Op.iLike]: `%${searchKeyword}%`,
-						},
+				},
+				{
+					slug: {
+						[Op.iLike]: `%${searchKeyword}%`,
 					},
-					// Containing the search term for other attributes
-					...attributes.map((attr) => ({
-						[attr]: { [Op.iLike]: `%${search}%` },
-					})),
-					{
-						...uspSearchCondition,
-					},
-				],
-			}
+				},
+				// Containing the search term for other attributes
+				...attributes.map((attr) => ({
+					[attr]: { [Op.iLike]: `%${search}%` },
+				})),
+				{
+					...uspSearchCondition,
+				},
+			],
+		}
 		: {};
 
 	const offset = getOffset(page, limit);
@@ -883,11 +883,11 @@ async function getPlaces(req) {
 	const daysCondition = categoryId
 		? day
 			? await searchManytoManyDays(
-					[day],
-					'days',
-					'place_to_subcategory',
-					categoryId,
-				)
+				[day],
+				'days',
+				'place_to_subcategory',
+				categoryId,
+			)
 			: {}
 		: await searchManytoManyDaysFilters(day, 'day', 'timing');
 	// const cuisineCondition = await searchManytoMany(
@@ -1047,19 +1047,19 @@ async function getPlaces(req) {
 	const order = search
 		? latitude && longitude
 			? [
-					[orderCondition], // Apply custom order condition first
-					[Sequelize.literal('distance'), 'ASC'], // Order by distance if latitude and longitude are provided
-					['id', 'DESC'], // Fallback to ordering by ID descending
-				]
+				[orderCondition], // Apply custom order condition first
+				[Sequelize.literal('distance'), 'ASC'], // Order by distance if latitude and longitude are provided
+				['id', 'DESC'], // Fallback to ordering by ID descending
+			]
 			: [
-					[orderCondition], // Apply custom order condition
-					['id', 'DESC'], // Fallback to ordering by ID descending
-				]
+				[orderCondition], // Apply custom order condition
+				['id', 'DESC'], // Fallback to ordering by ID descending
+			]
 		: latitude && longitude
 			? [
-					[Sequelize.literal('distance'), 'ASC'], // Order by distance if latitude and longitude are provided
-					['id', 'DESC'], // Fallback to ordering by ID descending
-				]
+				[Sequelize.literal('distance'), 'ASC'], // Order by distance if latitude and longitude are provided
+				['id', 'DESC'], // Fallback to ordering by ID descending
+			]
 			: [['id', 'DESC']];
 
 	const places = await db.place.findAndCountAll({
@@ -1112,35 +1112,35 @@ async function getPlaces(req) {
 		attributes:
 			longitude && latitude
 				? [
-						'id',
-						'title',
-						'address',
-						// 'temp_status',
-						'trending',
-						'latitude',
-						'longitude',
-						'ratings',
-						'reviews',
-						'slug',
-						[
-							Sequelize.literal(
-								`(6371 * acos(cos(radians(${latitude})) * cos(radians(latitude)) * cos(radians(longitude) - radians(${longitude})) + sin(radians(${latitude})) * sin(radians(latitude))))`,
-							),
-							'distance',
-						],
-					]
-				: [
-						'id',
-						'title',
-						'address',
-						// 'temp_status',
-						'trending',
-						'latitude',
-						'longitude',
-						'ratings',
-						'reviews',
-						'slug',
+					'id',
+					'title',
+					'address',
+					// 'temp_status',
+					'trending',
+					'latitude',
+					'longitude',
+					'ratings',
+					'reviews',
+					'slug',
+					[
+						Sequelize.literal(
+							`(6371 * acos(cos(radians(${latitude})) * cos(radians(latitude)) * cos(radians(longitude) - radians(${longitude})) + sin(radians(${latitude})) * sin(radians(latitude))))`,
+						),
+						'distance',
 					],
+				]
+				: [
+					'id',
+					'title',
+					'address',
+					// 'temp_status',
+					'trending',
+					'latitude',
+					'longitude',
+					'ratings',
+					'reviews',
+					'slug',
+				],
 
 		// order:
 		// similarity(title, 'search'),
@@ -1377,31 +1377,31 @@ async function getNearByPlaces(req) {
 			.replace(/"/g, '');
 	const searchCondition = search
 		? {
-				[Op.or]: [
-					{
-						slug: {
-							[Op.iLike]: `${searchKeyword}`,
-						},
+			[Op.or]: [
+				{
+					slug: {
+						[Op.iLike]: `${searchKeyword}`,
 					},
-					{
-						slug: {
-							[Op.iLike]: `${searchKeyword}%`,
-						},
+				},
+				{
+					slug: {
+						[Op.iLike]: `${searchKeyword}%`,
 					},
-					{
-						slug: {
-							[Op.iLike]: `%${searchKeyword}%`,
-						},
+				},
+				{
+					slug: {
+						[Op.iLike]: `%${searchKeyword}%`,
 					},
-					// Containing the search term for other attributes
-					...attributes.map((attr) => ({
-						[attr]: { [Op.iLike]: `%${search}%` },
-					})),
-					{
-						...uspSearchCondition,
-					},
-				],
-			}
+				},
+				// Containing the search term for other attributes
+				...attributes.map((attr) => ({
+					[attr]: { [Op.iLike]: `%${search}%` },
+				})),
+				{
+					...uspSearchCondition,
+				},
+			],
+		}
 		: {};
 
 	const offset = getOffset(page, limit);
@@ -1425,11 +1425,11 @@ async function getNearByPlaces(req) {
 	const daysCondition = categoryId
 		? day
 			? await searchManytoManyDays(
-					[day],
-					'days',
-					'place_to_subcategory',
-					categoryId,
-				)
+				[day],
+				'days',
+				'place_to_subcategory',
+				categoryId,
+			)
 			: {}
 		: await searchManytoManyDaysFilters(day, 'day', 'timing');
 	// const cuisineCondition = await searchManytoMany(
@@ -1589,19 +1589,19 @@ async function getNearByPlaces(req) {
 	const order = search
 		? latitude && longitude
 			? [
-					[orderCondition], // Apply custom order condition first
-					[Sequelize.literal('distance'), 'ASC'], // Order by distance if latitude and longitude are provided
-					['id', 'DESC'], // Fallback to ordering by ID descending
-				]
+				[orderCondition], // Apply custom order condition first
+				[Sequelize.literal('distance'), 'ASC'], // Order by distance if latitude and longitude are provided
+				['id', 'DESC'], // Fallback to ordering by ID descending
+			]
 			: [
-					[orderCondition], // Apply custom order condition
-					['id', 'DESC'], // Fallback to ordering by ID descending
-				]
+				[orderCondition], // Apply custom order condition
+				['id', 'DESC'], // Fallback to ordering by ID descending
+			]
 		: latitude && longitude
 			? [
-					[Sequelize.literal('distance'), 'ASC'], // Order by distance if latitude and longitude are provided
-					['id', 'DESC'], // Fallback to ordering by ID descending
-				]
+				[Sequelize.literal('distance'), 'ASC'], // Order by distance if latitude and longitude are provided
+				['id', 'DESC'], // Fallback to ordering by ID descending
+			]
 			: [['id', 'DESC']];
 
 	const places = await db.place.findAndCountAll({
@@ -1612,28 +1612,28 @@ async function getNearByPlaces(req) {
 			// ...locationCondition,
 			status: true,
 			...(map &&
-			latitudeDelta &&
-			longitudeDelta &&
-			latitudeQuery &&
-			longitudeQuery
+				latitudeDelta &&
+				longitudeDelta &&
+				latitudeQuery &&
+				longitudeQuery
 				? {
-						latitude: {
-							[Sequelize.Op.between]: [
-								parseFloat(latitudeQuery) -
-									parseFloat(latitudeDelta) / 2,
-								parseFloat(latitudeQuery) +
-									parseFloat(latitudeDelta) / 2,
-							],
-						},
-						longitude: {
-							[Sequelize.Op.between]: [
-								parseFloat(longitudeQuery) -
-									parseFloat(longitudeDelta) / 2,
-								parseFloat(longitudeQuery) +
-									parseFloat(longitudeDelta) / 2,
-							],
-						},
-					}
+					latitude: {
+						[Sequelize.Op.between]: [
+							parseFloat(latitudeQuery) -
+							parseFloat(latitudeDelta) / 2,
+							parseFloat(latitudeQuery) +
+							parseFloat(latitudeDelta) / 2,
+						],
+					},
+					longitude: {
+						[Sequelize.Op.between]: [
+							parseFloat(longitudeQuery) -
+							parseFloat(longitudeDelta) / 2,
+							parseFloat(longitudeQuery) +
+							parseFloat(longitudeDelta) / 2,
+						],
+					},
+				}
 				: {}),
 		},
 		include: [
@@ -1652,35 +1652,35 @@ async function getNearByPlaces(req) {
 		attributes:
 			longitude && latitude
 				? [
-						'id',
-						'title',
-						'address',
-						// 'temp_status',
-						'trending',
-						'latitude',
-						'longitude',
-						'ratings',
-						'reviews',
-						'slug',
-						[
-							Sequelize.literal(
-								`(6371 * acos(cos(radians(${latitude})) * cos(radians(latitude)) * cos(radians(longitude) - radians(${longitude})) + sin(radians(${latitude})) * sin(radians(latitude))))`,
-							),
-							'distance',
-						],
-					]
-				: [
-						'id',
-						'title',
-						'address',
-						// 'temp_status',
-						'trending',
-						'latitude',
-						'longitude',
-						'ratings',
-						'reviews',
-						'slug',
+					'id',
+					'title',
+					'address',
+					// 'temp_status',
+					'trending',
+					'latitude',
+					'longitude',
+					'ratings',
+					'reviews',
+					'slug',
+					[
+						Sequelize.literal(
+							`(6371 * acos(cos(radians(${latitude})) * cos(radians(latitude)) * cos(radians(longitude) - radians(${longitude})) + sin(radians(${latitude})) * sin(radians(latitude))))`,
+						),
+						'distance',
 					],
+				]
+				: [
+					'id',
+					'title',
+					'address',
+					// 'temp_status',
+					'trending',
+					'latitude',
+					'longitude',
+					'ratings',
+					'reviews',
+					'slug',
+				],
 
 		// order:
 		// similarity(title, 'search'),
@@ -1839,7 +1839,7 @@ async function getNearByPlaces(req) {
 	return places;
 }
 
-module.exports = {
+export default {
 	getPlaces,
 	getPlaceById,
 	getFilteredPlaces,

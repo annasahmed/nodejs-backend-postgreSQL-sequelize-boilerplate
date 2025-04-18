@@ -5,4 +5,4 @@ const router = express.Router();
 
 router.route('/').get(logController.getLogs);
 
-module.exports = router;
+export default router;

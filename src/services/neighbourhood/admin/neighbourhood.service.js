@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query');
 const ApiError = require('../../../utils/ApiError');
-const { encryptData } = require('../../../utils/auth');
+const { encryptData } = require('../../../utils/auth').default;
 const config = require('../../../config/config.js');
 const db = require('../../../db/models').default;
 const {
@@ -191,7 +191,7 @@ async function updateNeighbourhood(req) {
 	return updatedNeighbourhood;
 }
 
-module.exports = {
+export default {
 	getNeighbourhoods,
 	createNeighbourhood,
 	deleteNeighbourhoodById,

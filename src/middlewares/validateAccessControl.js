@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { roles } = require('../config/roles');
-const ApiError = require('../utils/ApiError');
+import ApiError from '../utils/ApiError';
 
 function grantAccess(action, resource) {
 	return async (req, _res, next) => {
@@ -13,7 +13,7 @@ function grantAccess(action, resource) {
 
 			const permission = roles
 				.can(JSON.stringify(req.user.roleId))
-				[modifiedAction](resource);
+			[modifiedAction](resource);
 
 			if (!permission.granted) {
 				throw new ApiError(
@@ -28,4 +28,4 @@ function grantAccess(action, resource) {
 	};
 }
 
-module.exports = { grantAccess };
+export default { grantAccess };

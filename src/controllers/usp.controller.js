@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { adminUspService, apiUspService } = require('../services');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
+import { adminUspService, apiUspService } from '../services'
 
 const getUsps = catchAsync(async (req, res) => {
 	const clientIdCms = req.headers['clientid'] === 'cms';
@@ -24,7 +24,7 @@ const updateUsp = catchAsync(async (req, res) => {
 	const usp = await adminUspService.updateUsp(req);
 	res.status(httpStatus.ACCEPTED).send({ usp });
 });
-module.exports = {
+export default {
 	getUsps,
 	addUsp,
 	deleteUsp,

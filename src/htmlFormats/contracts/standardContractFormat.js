@@ -272,4 +272,4 @@ const standartContractFormat = `
     </body>
 </html>
 `;
-module.exports = { standartContractFormat };
+export default { standartContractFormat };

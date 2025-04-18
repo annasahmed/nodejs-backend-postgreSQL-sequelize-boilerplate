@@ -106,7 +106,7 @@ async function deleteLocked(req) {
 	});
 }
 
-module.exports = {
+export default {
 	getLockedByCondition,
 	createLocked,
 	deleteLocked,

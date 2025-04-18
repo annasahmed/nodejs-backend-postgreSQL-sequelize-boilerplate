@@ -1,11 +1,11 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
 const {
 	imageService,
 	adminHomeService,
 	apiHomeService,
-} = require('../services');
+} from '../services'
 
 const getSlides = catchAsync(async (req, res) => {
 	const slides = await apiHomeService.getSlides(req);
@@ -45,7 +45,7 @@ const updateSlide = catchAsync(async (req, res) => {
 	const slide = await adminHomeService.updateSlide(req);
 	res.status(httpStatus.ACCEPTED).send({ slide });
 });
-module.exports = {
+export default {
 	getSlides,
 	deleteSlide,
 	updateSlide,

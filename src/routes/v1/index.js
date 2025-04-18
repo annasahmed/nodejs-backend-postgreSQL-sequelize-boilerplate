@@ -117,4 +117,4 @@ router.use('/website', websiteRoutes);
 //website
 router.use('/website/', websiteTempRoutes);
 
-module.exports = router;
+export default router;

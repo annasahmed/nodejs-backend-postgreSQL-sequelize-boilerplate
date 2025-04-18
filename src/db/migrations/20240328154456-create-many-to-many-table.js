@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 	up: (queryInterface, Sequelize) => {
 		return Promise.all([
 			queryInterface.createTable('monthly_deal_to_deal', {}),

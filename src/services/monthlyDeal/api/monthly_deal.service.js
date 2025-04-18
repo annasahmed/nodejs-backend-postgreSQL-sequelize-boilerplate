@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query.js');
 const ApiError = require('../../../utils/ApiError.js');
-const { encryptData } = require('../../../utils/auth.js');
+const { encryptData } = require('../../../utils/auth.js').default;
 const config = require('../../../config/config.js');
 const db = require('../../../db/models/index.js').default;
 const userService = require('../../user.service.js');
@@ -204,14 +204,14 @@ async function getMonthlyDealsWithoutCount(req) {
 			.replace(/"/g, '');
 	const searchCondition = search
 		? {
-				[Op.or]: [
-					{
-						slug: {
-							[Op.iLike]: `%${searchKeyword}%`,
-						},
+			[Op.or]: [
+				{
+					slug: {
+						[Op.iLike]: `%${searchKeyword}%`,
 					},
-				],
-			}
+				},
+			],
+		}
 		: {};
 
 	const monthlyDeals = await db.monthly_deal.findAll({
@@ -245,28 +245,28 @@ async function getMonthlyDealsWithoutCount(req) {
 
 		const daysCondition =
 			day &&
-			[
-				'monday',
-				'tuesday',
-				'wednesday',
-				'thursday',
-				'friday',
-				'saturday',
-				'sunday',
-			].includes(day.toLowerCase())
+				[
+					'monday',
+					'tuesday',
+					'wednesday',
+					'thursday',
+					'friday',
+					'saturday',
+					'sunday',
+				].includes(day.toLowerCase())
 				? subCategoryIds?.length
 					? await searchManytoManyDays(
-							[day],
-							'days',
-							'place_to_subcategory',
-							subCategoryIds,
-						)
+						[day],
+						'days',
+						'place_to_subcategory',
+						subCategoryIds,
+					)
 					: await searchManytoManyDays(
-							[day],
-							'days',
-							'place_to_subcategory',
-							-1,
-						)
+						[day],
+						'days',
+						'place_to_subcategory',
+						-1,
+					)
 				: {};
 		// monthlyDeal.categories = await db.sub_category.findAll({
 		// 	where: { id: subCategoryIds },
@@ -343,35 +343,35 @@ async function getMonthlyDealsWithoutCount(req) {
 			attributes:
 				longitude && latitude
 					? [
-							'id',
-							'title',
-							'slug',
-							'address',
-							'temp_status',
-							'trending',
-							'latitude',
-							'longitude',
-							'ratings',
-							'reviews',
-							[
-								Sequelize.literal(
-									`(6371 * acos(cos(radians(${latitude})) * cos(radians(latitude)) * cos(radians(longitude) - radians(${longitude})) + sin(radians(${latitude})) * sin(radians(latitude))))`,
-								),
-								'distance',
-							],
-						]
-					: [
-							'id',
-							'title',
-							'slug',
-							'address',
-							'temp_status',
-							'trending',
-							'latitude',
-							'longitude',
-							'ratings',
-							'reviews',
+						'id',
+						'title',
+						'slug',
+						'address',
+						'temp_status',
+						'trending',
+						'latitude',
+						'longitude',
+						'ratings',
+						'reviews',
+						[
+							Sequelize.literal(
+								`(6371 * acos(cos(radians(${latitude})) * cos(radians(latitude)) * cos(radians(longitude) - radians(${longitude})) + sin(radians(${latitude})) * sin(radians(latitude))))`,
+							),
+							'distance',
 						],
+					]
+					: [
+						'id',
+						'title',
+						'slug',
+						'address',
+						'temp_status',
+						'trending',
+						'latitude',
+						'longitude',
+						'ratings',
+						'reviews',
+					],
 			include: [
 				{
 					model: db.media,
@@ -387,9 +387,9 @@ async function getMonthlyDealsWithoutCount(req) {
 			order:
 				latitude && longitude
 					? [
-							[Sequelize.literal('distance'), 'ASC'],
-							['id', 'DESC'],
-						]
+						[Sequelize.literal('distance'), 'ASC'],
+						['id', 'DESC'],
+					]
 					: [['id', 'DESC']],
 			limit,
 			offset,
@@ -1044,8 +1044,8 @@ async function getHomepageMonthlyDealsDelete(req) {
 	return monthlyDeals;
 }
 
-module.exports = {
-	getMonthlyDeals: () => {},
+export default {
+	getMonthlyDeals: () => { },
 	getMonthlyDealsWithoutCount,
 	getMonthlyDealById,
 	getHomepageMonthlyDeals,

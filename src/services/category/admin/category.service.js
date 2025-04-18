@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query.js');
 const ApiError = require('../../../utils/ApiError.js');
 const config = require('../../../config/config.js');
@@ -51,7 +51,7 @@ async function getCategories(req) {
 
 	for (const category of categories.rows) {
 		category.sub_categories = await db.sub_category.findAll({
-			where: { category_id:[ category.id ,3] },
+			where: { category_id: [category.id, 3] },
 			order: [['id', 'ASC']],
 			attributes: ['id', 'title', 'image', 'timing', 'created_date_time'],
 			raw: true,
@@ -88,7 +88,7 @@ async function getCategories(req) {
 	return categories;
 }
 
-module.exports = {
+export default {
 	createCategory,
 	getCategories,
 	getCategoryById,

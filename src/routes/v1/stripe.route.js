@@ -19,4 +19,4 @@ router
 	.route('/invoice-paid/manual')
 	.post(stripeController.stripeInvoicePaidManual);
 
-module.exports = router;
+export default router;

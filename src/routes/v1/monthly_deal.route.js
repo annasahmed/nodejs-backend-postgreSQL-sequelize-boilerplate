@@ -19,4 +19,4 @@ router
 	.patch(monthlyDealController.updateMonthlyDeal);
 router.route('/reorder').post(monthlyDealController.reorder);
 
-module.exports = router;
+export default router;

@@ -25,4 +25,4 @@ router
 	);
 router.route('/type/:type').get(homeController.getSlidesByType);
 
-module.exports = router;
+export default router;

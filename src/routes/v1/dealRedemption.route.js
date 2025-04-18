@@ -16,4 +16,4 @@ router
 	.route('/delete/chk/:placeId')
 	.delete(dealRedemptionController.deleteRedemptionsByPlaceIdChk);
 
-module.exports = router;
+export default router;

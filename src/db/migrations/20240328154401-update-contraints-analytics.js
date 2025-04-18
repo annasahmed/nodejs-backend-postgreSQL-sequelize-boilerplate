@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		const tableDescription = await queryInterface.describeTable('analytic');
-		
+
 		if (tableDescription['user_id']) {
 			await queryInterface.removeConstraint(
 				'analytic',

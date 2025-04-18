@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const ApiError = require('../../../utils/ApiError');
 const db = require('../../../db/models').default;
 const { adminPlaceService, adminappUserService } = require('../../index.js');
@@ -114,6 +114,6 @@ async function createAnalytic(req) {
 	}
 }
 
-module.exports = {
+export default {
 	createAnalytic,
 };

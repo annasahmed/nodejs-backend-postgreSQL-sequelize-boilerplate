@@ -1,8 +1,8 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const userService = require('./user.service');
-const ApiError = require('../utils/ApiError');
-const { decryptData } = require('../utils/auth');
-const db = require('../db/models').default;
+import ApiError from '../utils/ApiError';
+const { decryptData } = require('../utils/auth').default;
+import db from '../db/models'
 const { getUserSaving } = require('./Api/UserSaving.service');
 const { UserSavingsTransformer } = require('../transformers');
 const { getPermissionByRoleId } = require('./permission.service');
@@ -109,6 +109,6 @@ async function loginAppUserWithEmailAndPassword(req, isUser = true) {
 	return user;
 }
 
-module.exports = {
+export default {
 	loginUserWithEmailAndPassword,
 };

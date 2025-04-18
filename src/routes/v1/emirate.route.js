@@ -14,4 +14,4 @@ router
 	.delete(emirateController.deleteEmirate)
 	.patch(emirateController.updateEmirate);
 
-module.exports = router;
+export default router;

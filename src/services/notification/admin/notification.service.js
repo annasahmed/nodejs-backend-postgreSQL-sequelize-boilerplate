@@ -3,7 +3,7 @@ const ApiError = require('../../../utils/ApiError');
 const { NOT_FOUND } = require('http-status');
 const { FcmNotificationService } = require('../../../config/fcm');
 const { imageService } = require('../../index');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 const { Op } = require('sequelize');
 const { addJobToQueue } = require('../../../queue/queue.service');
 const { uploadToS3 } = require('../../image.service');
@@ -173,7 +173,7 @@ const createUserNotification = async (notificationId) => {
 	return true;
 };
 
-module.exports = {
+export default {
 	createNotification,
 	getNotifications,
 	getNotificationById,

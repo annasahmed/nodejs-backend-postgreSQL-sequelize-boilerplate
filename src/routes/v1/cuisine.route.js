@@ -1,7 +1,7 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
 const userValidation = require('../../validations/user.validation');
-const {cuisineController} = require('../../controllers');
+const { cuisineController } = require('../../controllers');
 
 const router = express.Router();
 
@@ -16,4 +16,4 @@ router
 	.delete(cuisineController.deleteCuisine)
 	.patch(cuisineController.updateCuisine);
 
-module.exports = router;
+export default router;

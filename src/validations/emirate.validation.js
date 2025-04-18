@@ -50,7 +50,7 @@ const deleteUser = {
 	}),
 };
 
-module.exports = {
+export default {
 	createEmirate,
 	getUsers,
 	getUser,

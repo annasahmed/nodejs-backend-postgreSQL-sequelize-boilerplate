@@ -79,4 +79,4 @@ router
 	.route('/happening/update/:happeningId')
 	.patch(placeController.updatePlaceHappeningStatus);
 
-module.exports = router;
+export default router;

@@ -3,7 +3,7 @@
 const { default: axios } = require('axios');
 const db = require('../models');
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		for (let i = 1; i < 5; i++) {
 			const categories = [];
@@ -32,5 +32,5 @@ module.exports = {
 		}
 	},
 
-	down: async (queryInterface, Sequelize) => {},
+	down: async (queryInterface, Sequelize) => { },
 };

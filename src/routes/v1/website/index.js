@@ -10,4 +10,4 @@ router.use('/places', placesRoute);
 // places
 router.use('/category', categoriesRoute);
 
-module.exports = router;
+export default router;

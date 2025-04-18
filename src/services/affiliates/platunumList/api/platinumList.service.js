@@ -5,7 +5,7 @@ const db = require('../../../../db/models').default;
 const { getOffset } = require('../../../../utils/query');
 const { Op } = require('sequelize');
 const ApiError = require('../../../../utils/ApiError');
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const API_KEY = 'ddc51f83-65eb-46df-8ac4-ee1b74e2af63';
 
 const countryBounds = {
@@ -413,7 +413,7 @@ async function getAffiliateAreas(req) {
 	return affiliateAreas;
 }
 
-module.exports = {
+export default {
 	getEvents,
 	getAffiliateCategories,
 	getAffiliateAreas,

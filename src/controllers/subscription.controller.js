@@ -1,7 +1,8 @@
-const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
-const catchAsync = require('../utils/catchAsync');
-const { subscriptionService } = require('../services');
+import httpStatus from 'http-status';
+import ApiError from '../utils/ApiError.js';
+import catchAsync from '../utils/catchAsync.js';
+import { subscriptionService } from '../services/index.js';
+
 
 const createSubscription = catchAsync(async (req, res) => {
 	const subscription = await subscriptionService.createSubscription(req);
@@ -31,7 +32,7 @@ const updateSubscription = catchAsync(async (req, res) => {
 	res.send({ subscription });
 });
 
-module.exports = {
+export default {
 	createSubscription,
 	getSubscriptions,
 	getSubscription,

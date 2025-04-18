@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
   up: async (queryInterface, Sequelize) => {
     // Update the 'email' and 'username' columns to remove spaces
     await queryInterface.sequelize.query(`

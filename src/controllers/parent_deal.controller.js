@@ -1,7 +1,8 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { adminParentDealService, imageService } = require('../services');
+import httpStatus from 'http-status';
+import catchAsync from '../utils/catchAsync.js';
+import ApiError from '../utils/ApiError.js';
+import { adminParentDealService, imageService } from '../services/index.js';
+
 
 const getParentDeals = catchAsync(async (req, res) => {
 	const parentDeals = await adminParentDealService.getParentDeals(req);
@@ -31,7 +32,7 @@ const updateParentDeal = catchAsync(async (req, res) => {
 	const ParentDeal = await adminParentDealService.updateParentDeal(req);
 	res.status(httpStatus.ACCEPTED).send({ ParentDeal });
 });
-module.exports = {
+export default {
 	getParentDeals,
 	addParentDeal,
 	deleteParentDeal,

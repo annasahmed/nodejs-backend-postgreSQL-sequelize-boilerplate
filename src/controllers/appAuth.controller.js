@@ -1,15 +1,15 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const {
+import httpStatus from 'http-status';
+import catchAsync from '../utils/catchAsync.js';
+import {
 	authService,
 	userService,
 	emailService,
 	tokenService,
 	otpService,
 	adminappUserService,
-} = require('../services');
-const { verifyToken, decryptData } = require('../utils/auth');
-const ApiError = require('../utils/ApiError');
+} from '../services/index.js';
+import { verifyToken, decryptData } from '../utils/auth.js';
+import ApiError from '../utils/ApiError.js';
 
 const sendOtp = catchAsync(async (req, res) => {
 	const { email } = req.body;
@@ -121,7 +121,7 @@ const verifyOtp = catchAsync(async (req, res) => {
 // 	res.send({ success: true });
 // });
 
-module.exports = {
+export default {
 	appRegister,
 	login,
 	forgotPassword,

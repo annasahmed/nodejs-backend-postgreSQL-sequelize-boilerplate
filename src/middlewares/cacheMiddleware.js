@@ -7,7 +7,7 @@ const checkCache = async (req, res, next) => {
 
   try {
     const cachedData = await redisClient.get(cacheKey);
-    
+
     if (cachedData) {
       console.log('Data retrieved from cache');
       return res.status(200).json(JSON.parse(cachedData));
@@ -34,4 +34,4 @@ const cacheResponse = (req, res, next) => {
   next();
 };
 
-module.exports = { checkCache, cacheResponse };
+export default { checkCache, cacheResponse };

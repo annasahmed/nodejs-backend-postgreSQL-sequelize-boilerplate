@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query');
 const ApiError = require('../../../utils/ApiError');
 const config = require('../../../config/config.js');
@@ -28,7 +28,7 @@ const {
 	updatePlaceSubscription,
 	createPlaceSubscription,
 } = require('./placeSubscription.service');
-const { encryptData, decryptData } = require('../../../utils/auth.js');
+const { encryptData, decryptData } = require('../../../utils/auth.js').default;
 const { sendWelcomeEmailVendor } = require('../../email.service.js');
 const { getSubscriptions } = require('./trending.service.js');
 
@@ -241,43 +241,43 @@ async function updatePlaceByByIdImport(req) {
 	const uspIdsArr = uspIds && uspIds;
 	categoryIdsArr?.length >= 0
 		? await db.place_to_subcategory.destroy({
-				where: { place_id: id },
-			})
+			where: { place_id: id },
+		})
 		: null;
 	cuisineIdsArr?.length >= 0
 		? await db.place_to_cuisine.destroy({
-				where: { place_id: id },
-			})
+			where: { place_id: id },
+		})
 		: null;
 	uspIdsArr?.length >= 0
 		? await db.place_to_usp.destroy({
-				where: { place_id: id },
-			})
+			where: { place_id: id },
+		})
 		: null;
 	await Promise.all(
 		categoryIdsArr?.length
 			? categoryIdsArr?.map((categoryId) => {
-					return db.place_to_subcategory.create({
-						placeId: id,
-						subCategoryId: categoryId,
-					});
-				})
+				return db.place_to_subcategory.create({
+					placeId: id,
+					subCategoryId: categoryId,
+				});
+			})
 			: [],
 		cuisineIdsArr?.length
 			? cuisineIdsArr?.map((cuisineId) => {
-					return db.place_to_cuisine.create({
-						placeId: id,
-						cuisineId,
-					});
-				})
+				return db.place_to_cuisine.create({
+					placeId: id,
+					cuisineId,
+				});
+			})
 			: [],
 		uspIdsArr?.length
 			? uspIdsArr?.map((uspId) => {
-					return db.place_to_usp.create({
-						placeId: id,
-						uspId,
-					});
-				})
+				return db.place_to_usp.create({
+					placeId: id,
+					uspId,
+				});
+			})
 			: [],
 	);
 
@@ -754,53 +754,53 @@ async function createPlace(req) {
 			await Promise.all(
 				categoryIdsArr?.length
 					? categoryIdsArr?.map((categoryId) => {
-							return db.place_to_subcategory.create({
-								placeId: id,
-								subCategoryId: categoryId.value,
-								days: categoryId.days
-									? categoryId.days
-									: ['daily'],
-							});
-						})
+						return db.place_to_subcategory.create({
+							placeId: id,
+							subCategoryId: categoryId.value,
+							days: categoryId.days
+								? categoryId.days
+								: ['daily'],
+						});
+					})
 					: [],
 				cuisineIdsArr?.length
 					? cuisineIdsArr?.map((cuisineId) => {
-							return db.place_to_cuisine.create({
-								placeId: id,
-								cuisineId,
-							});
-						})
+						return db.place_to_cuisine.create({
+							placeId: id,
+							cuisineId,
+						});
+					})
 					: [],
 				uspIdsArr?.length
 					? uspIdsArr?.map((uspId) => {
-							return db.place_to_usp.create({
-								placeId: id,
-								uspId,
-							});
-						})
+						return db.place_to_usp.create({
+							placeId: id,
+							uspId,
+						});
+					})
 					: [],
 
 				happeningsArr?.length
 					? await createHappening({
-							body: {
-								happeningsArr: happeningsArr?.map(
-									(obj, index) => {
-										return {
-											title: obj.happeningTitle,
-											description:
-												obj.happeningDescription,
-											user_id: userId,
-											status: true,
-											place_id: id,
-											weight: index,
-											season_id: obj.seasonId || null,
-											start_date: obj.start_date || null,
-											end_date: obj.end_date || null,
-										};
-									},
-								),
-							},
-						})
+						body: {
+							happeningsArr: happeningsArr?.map(
+								(obj, index) => {
+									return {
+										title: obj.happeningTitle,
+										description:
+											obj.happeningDescription,
+										user_id: userId,
+										status: true,
+										place_id: id,
+										weight: index,
+										season_id: obj.seasonId || null,
+										start_date: obj.start_date || null,
+										end_date: obj.end_date || null,
+									};
+								},
+							),
+						},
+					})
 					: [],
 				await createMedia({
 					body: {
@@ -812,15 +812,15 @@ async function createPlace(req) {
 				}),
 				timingsArr?.length
 					? await createTiming({
-							body: {
-								timingsArr: timingsArr.map((obj) => {
-									return {
-										...obj,
-										place_id: id,
-									};
-								}),
-							},
-						})
+						body: {
+							timingsArr: timingsArr.map((obj) => {
+								return {
+									...obj,
+									place_id: id,
+								};
+							}),
+						},
+					})
 					: [],
 			);
 
@@ -949,18 +949,18 @@ async function createPlaceByPhone(req) {
 							consolidateSchedule(timingsArr);
 						updatedTimingArr?.length
 							? await createTiming({
-									body: {
-										timingsArr: updatedTimingArr.map(
-											(obj) => {
-												return {
-													...obj,
-													place_id: id,
-													uploaded_from_google: true,
-												};
-											},
-										),
-									},
-								})
+								body: {
+									timingsArr: updatedTimingArr.map(
+										(obj) => {
+											return {
+												...obj,
+												place_id: id,
+												uploaded_from_google: true,
+											};
+										},
+									),
+								},
+							})
 							: null;
 					}
 					return resultEntity.get({ plain: true });
@@ -1104,8 +1104,8 @@ async function updatePlaceTiming(req) {
 
 			updatedTimingArr?.length
 				? (await db.timing.destroy({
-						where: { place_id: id },
-					}),
+					where: { place_id: id },
+				}),
 					await createTiming({
 						body: {
 							timingsArr: updatedTimingArr.map((obj) => {
@@ -1184,11 +1184,11 @@ async function getFilteredPlaces(req) {
 	const daysCondition = categoryId
 		? day
 			? await searchManytoManyDays(
-					[day],
-					'days',
-					'place_to_subcategory',
-					categoryId,
-				)
+				[day],
+				'days',
+				'place_to_subcategory',
+				categoryId,
+			)
 			: {}
 		: await searchManytoMany(day, 'day', 'timing');
 
@@ -1252,42 +1252,42 @@ async function getFilteredPlaces(req) {
 				await Promise.all(
 					res
 						? res?.map(async (subCategory, index) => {
-								let place =
-									await db.place_to_subcategory.findAll({
-										where: {
-											sub_category_id: subCategory.id,
-										},
-										attributes: ['place_id'],
-										raw: true,
-									});
-
-								const usps = await db.place_to_usp.count({
+							let place =
+								await db.place_to_subcategory.findAll({
 									where: {
-										place_id: place.map(
-											(item) => item.place_id,
-										),
+										sub_category_id: subCategory.id,
 									},
-									group: ['usp_id'],
+									attributes: ['place_id'],
 									raw: true,
 								});
 
-								res[index].places = usps.count;
-								const uspsArr = await db.usp.findAll({
-									where: {
-										id: usps?.map((item) => item.usp_id),
-									},
-									attributes: ['id', 'title'],
-									raw: true,
-								});
-								const uspsWithPlaces = uspsArr.map((usp) => ({
-									...usp,
-									places:
-										usps?.find(
-											(row) => row.usp_id === usp.id,
-										)?.count || 0,
-								}));
-								res[index].usps = uspsWithPlaces;
-							})
+							const usps = await db.place_to_usp.count({
+								where: {
+									place_id: place.map(
+										(item) => item.place_id,
+									),
+								},
+								group: ['usp_id'],
+								raw: true,
+							});
+
+							res[index].places = usps.count;
+							const uspsArr = await db.usp.findAll({
+								where: {
+									id: usps?.map((item) => item.usp_id),
+								},
+								attributes: ['id', 'title'],
+								raw: true,
+							});
+							const uspsWithPlaces = uspsArr.map((usp) => ({
+								...usp,
+								places:
+									usps?.find(
+										(row) => row.usp_id === usp.id,
+									)?.count || 0,
+							}));
+							res[index].usps = uspsWithPlaces;
+						})
 						: [],
 					places.subCategories.push(...res),
 				);
@@ -1648,11 +1648,11 @@ async function getPlaces(req) {
 	const daysCondition =
 		categoryId && day
 			? await searchManytoManyDays(
-					[day],
-					'days',
-					'place_to_subcategory',
-					categoryId,
-				)
+				[day],
+				'days',
+				'place_to_subcategory',
+				categoryId,
+			)
 			: {};
 
 	delete subcategoryCondition.days;
@@ -1974,12 +1974,12 @@ async function createPlaceToCategoryImport(req) {
 
 	categoryIdsArr?.length
 		? categoryIdsArr?.map((categoryId) => {
-				return db.place_to_subcategory.create({
-					placeId,
-					subCategoryId: categoryId.value,
-					days: categoryId.days ? categoryId.days : ['daily'],
-				});
-			})
+			return db.place_to_subcategory.create({
+				placeId,
+				subCategoryId: categoryId.value,
+				days: categoryId.days ? categoryId.days : ['daily'],
+			});
+		})
 		: [];
 }
 async function updatePlaceToCategory(catId, placeId, transaction) {
@@ -2442,7 +2442,7 @@ async function getPlaceLogos(req) {
 	);
 }
 
-module.exports = {
+export default {
 	getPlaces,
 	getTimings,
 	createPlace,

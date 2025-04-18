@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query.js');
 const ApiError = require('../../../utils/ApiError.js');
 const config = require('../../../config/config.js');
@@ -63,31 +63,31 @@ async function getCategories(req) {
 		await Promise.all(
 			category.sub_categories
 				? category.sub_categories?.map(async (subCategory, index) => {
-						let place = await db.place_to_subcategory.findAll({
-							where: { sub_category_id: subCategory.id },
-							attributes: ['place_id'],
-							raw: true,
-						});
+					let place = await db.place_to_subcategory.findAll({
+						where: { sub_category_id: subCategory.id },
+						attributes: ['place_id'],
+						raw: true,
+					});
 
-						const usps = await db.place_to_usp.findAll({
-							where: {
-								place_id: place.map((item) => item.place_id),
-							},
-							attributes: ['usp_id'],
-							raw: true,
-						});
+					const usps = await db.place_to_usp.findAll({
+						where: {
+							place_id: place.map((item) => item.place_id),
+						},
+						attributes: ['usp_id'],
+						raw: true,
+					});
 
-						const uspsArr = await db.usp.findAll({
-							where: {
-								id: usps?.map((item) => item.usp_id),
-								status: true,
-							},
-							attributes: ['id', 'title'],
-							raw: true,
-						});
+					const uspsArr = await db.usp.findAll({
+						where: {
+							id: usps?.map((item) => item.usp_id),
+							status: true,
+						},
+						attributes: ['id', 'title'],
+						raw: true,
+					});
 
-						category.sub_categories[index].usps = uspsArr;
-					})
+					category.sub_categories[index].usps = uspsArr;
+				})
 				: [],
 		);
 	}
@@ -95,7 +95,7 @@ async function getCategories(req) {
 	return categories;
 }
 
-module.exports = {
+export default {
 	createCategory,
 	getCategories,
 	getCategoryById,

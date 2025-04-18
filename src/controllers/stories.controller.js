@@ -1,11 +1,12 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const {
+import httpStatus from 'http-status';
+import catchAsync from '../utils/catchAsync.js';
+import ApiError from '../utils/ApiError.js';
+import {
 	adminStoriesService,
 	imageService,
 	apiStoriesService,
-} = require('../services');
+} from '../services/index.js';
+
 
 const getStories = catchAsync(async (req, res) => {
 	const clientId = req.headers['clientid'] === 'cms';
@@ -90,7 +91,7 @@ const updateStory = catchAsync(async (req, res) => {
 	const story = await adminStoriesService.updateStory(req);
 	res.status(httpStatus.ACCEPTED).send({ story });
 });
-module.exports = {
+export default {
 	getStories,
 	deleteStory,
 	updateStory,

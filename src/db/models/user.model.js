@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-	const appUser = sequelize.define(
-		'appUser',
+	const user = sequelize.define(
+		'user',
 		{
 			id: {
 				type: DataTypes.INTEGER,
@@ -75,17 +75,17 @@ export default (sequelize, DataTypes) => {
 			 * By default, sequelize will automatically transform all passed model names into plural
 			 * References: https://sequelize.org/master/manual/model-basics.html#table-name-inference
 			 */
-			tableName: 'appUser',
+			tableName: 'user',
 		},
 	);
-	appUser.associate = (models) => {
-		appUser.belongsToMany(models.place, {
-			through: 'appUser_favourite_place',
+	user.associate = (models) => {
+		user.belongsToMany(models.place, {
+			through: 'user_favourite_place',
 		});
-		appUser.hasMany(models.deal_redemption, {
+		user.hasMany(models.deal_redemption, {
 			foreignKey: 'user_id',
 		});
 	};
 
-	return appUser;
+	return user;
 };

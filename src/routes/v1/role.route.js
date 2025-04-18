@@ -37,7 +37,7 @@ router
 		roleController.deleteRole,
 	);
 
-module.exports = router;
+export default router;
 
 /**
  * @swagger

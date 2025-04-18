@@ -19,4 +19,4 @@ router
 		parentDealController.updateParentDeal,
 	);
 
-module.exports = router;
+export default router;

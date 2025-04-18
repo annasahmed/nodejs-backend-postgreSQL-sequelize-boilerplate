@@ -279,6 +279,6 @@ async function getDeals(req, locationCondition) {
 	return finalArr;
 }
 
-module.exports = {
+export default {
 	getDeals,
 };

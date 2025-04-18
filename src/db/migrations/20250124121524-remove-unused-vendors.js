@@ -2,7 +2,7 @@
 
 const { Op, Sequelize } = require('sequelize');
 
-module.exports = {
+export default {
   async up(queryInterface) {
     // Step 1: Fetch all vendor IDs where package_id is not 2
     const trueVendorsQuery = `

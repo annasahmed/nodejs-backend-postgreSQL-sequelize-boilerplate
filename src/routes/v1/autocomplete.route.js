@@ -7,4 +7,4 @@ router
   .route('/place/search')
   .get(autoCompleteController.searchPlace)
 
-module.exports = router;
+export default router;

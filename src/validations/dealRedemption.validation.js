@@ -19,6 +19,6 @@ const validateDealRedeem = (req, res, next) => {
 	next();
 };
 
-module.exports = {
+export default {
 	validateDealRedeem,
 };

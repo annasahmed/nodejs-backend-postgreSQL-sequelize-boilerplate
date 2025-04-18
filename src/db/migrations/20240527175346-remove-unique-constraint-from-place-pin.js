@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		await queryInterface.removeIndex('place', 'place_place_pin_key');
 		await queryInterface.removeIndex('place', 'places_place_pin_unique');

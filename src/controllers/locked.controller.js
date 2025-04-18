@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const { adminLockedService } = require('../services');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+const { adminLockedService } from '../services'
 
 const getLocked = catchAsync(async (req, res) => {
 	const locked = await adminLockedService.getLockedByCondition(req);
@@ -21,7 +21,7 @@ const getLockedByUserId = catchAsync(async (req, res) => {
 	res.send({ locked });
 });
 
-module.exports = {
+export default {
 	getLocked,
 	addLocked,
 	deleteLockedByUserId,

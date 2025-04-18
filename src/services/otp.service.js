@@ -2,7 +2,7 @@ const {
 	sendOTPEmailVerification,
 	sendForgotPasswordEmail,
 } = require('./email.service');
-const db = require('../db/models').default;
+import db from '../db/models'
 const { Op } = require('sequelize');
 
 const cron = require('node-cron');
@@ -94,7 +94,7 @@ async function verifyOTP(emailToVerify, otpToVerify) {
 	}
 }
 
-module.exports = {
+export default {
 	verifyEmail,
 	sendOTPResetPassword,
 	getOtpByEmail,

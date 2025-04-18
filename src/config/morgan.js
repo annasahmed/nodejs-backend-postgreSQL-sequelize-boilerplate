@@ -1,10 +1,10 @@
-const morgan = require('morgan');
-const config = require('./config');
-const logger = require('./logger');
-const { verifyToken } = require('../utils/auth');
-const db = require('../db/models').default;
-// const { userService } = require('../services');
-// const { getUserById } = require('../services/user.service');
+import morgan from 'morgan';
+import config from './config';
+import logger from './logger';
+import { verifyToken } from '../utils/auth'
+import db from '../db/models'
+// import { userService } from '../services'
+// import { getUserById } from '../services/user.service'
 
 morgan.token('message', (_req, res) => res.locals.errorMessage || '');
 morgan.token('req-body', (req) => {
@@ -127,7 +127,7 @@ const saveLogToDatabase = async (message, errorDetails) => {
 		logger.error('Failed to log to the database:', error);
 	}
 };
-module.exports = {
+export default {
 	successHandler,
 	errorHandler,
 };

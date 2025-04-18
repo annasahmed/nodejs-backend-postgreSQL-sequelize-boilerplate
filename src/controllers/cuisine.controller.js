@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { adminCuisineService } = require('../services');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
+const { adminCuisineService } from '../services'
 
 const getCuisineById = catchAsync(async (req, res) => {
 	const cuisine = await adminCuisineService.getCuisineById(
@@ -27,7 +27,7 @@ const updateCuisine = catchAsync(async (req, res) => {
 	const cuisine = await adminCuisineService.updateCuisine(req);
 	res.status(httpStatus.ACCEPTED).send({ cuisine });
 });
-module.exports = {
+export default {
 	getCuisines,
 	getCuisineById,
 	addCuisine,

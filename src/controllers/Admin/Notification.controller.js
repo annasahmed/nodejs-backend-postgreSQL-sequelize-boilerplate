@@ -1,9 +1,9 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../../utils/catchAsync');
-const {
+import httpStatus from 'http-status'
+import catchAsync from '../../utils/catchAsync';
+import {
 	adminNotificationService,
 	apiNotificationService,
-} = require('../../services');
+} from '../../services';
 
 const createNotification = catchAsync(async (req, res) => {
 	const notification = await adminNotificationService.createNotification(req);
@@ -42,7 +42,7 @@ const sendNotification = catchAsync(async (req, res) => {
 	res.status(httpStatus.OK).send({ response });
 });
 
-module.exports = {
+export default {
 	createNotification,
 	getNotifications,
 	deleteAppNotification,

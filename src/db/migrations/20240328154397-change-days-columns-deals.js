@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		const tableDescription = await queryInterface.describeTable('deal');
 
@@ -23,5 +23,5 @@ module.exports = {
 		}
 	},
 
-	down: async (queryInterface, Sequelize) => {},
+	down: async (queryInterface, Sequelize) => { },
 };

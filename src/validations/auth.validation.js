@@ -64,7 +64,7 @@ const resetPassword = {
 	}),
 };
 
-module.exports = {
+export default {
 	register,
 	appRegister,
 	login,

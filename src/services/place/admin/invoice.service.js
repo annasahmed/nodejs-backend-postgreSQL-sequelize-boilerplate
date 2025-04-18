@@ -1,9 +1,9 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const ApiError = require('../../../utils/ApiError.js');
 const db = require('../../../db/models/index.js').default;
 const stripe = require('../../../config/stripe');
 const { sendInvoiceEmail } = require('../../email.service');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 const { Op } = require('sequelize')
 
 const getInvoices = async (req) => {
@@ -18,8 +18,8 @@ const getInvoices = async (req) => {
 		order: [['id', 'DESC']],
 		where: {
 			vendor_id: vendorId,
-			status_id:{
-				[Op.not]:5
+			status_id: {
+				[Op.not]: 5
 			}
 		},
 	});
@@ -75,7 +75,7 @@ const sendInvoiceToEmail = async (req) => {
 	return true;
 };
 
-module.exports = {
+export default {
 	getInvoices,
 	sendInvoiceToEmail,
 };

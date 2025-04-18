@@ -280,4 +280,4 @@ const premuimContractFormat = `<html lang="en">
 </html>
 `;
 
-module.exports = { premuimContractFormat };
+export default { premuimContractFormat };

@@ -12,4 +12,4 @@ class DealRedemptionTransformer {
 	}
 }
 
-module.exports = new DealRedemptionTransformer();
+export default new DealRedemptionTransformer();

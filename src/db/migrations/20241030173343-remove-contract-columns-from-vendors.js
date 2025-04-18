@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
   up: async (queryInterface, Sequelize) => {
     // Check if columns exist before removing them
     const tableDescription = await queryInterface.describeTable('vendors');

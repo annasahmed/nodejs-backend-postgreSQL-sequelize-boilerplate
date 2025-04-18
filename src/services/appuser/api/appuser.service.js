@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query.js');
 const ApiError = require('../../../utils/ApiError.js');
 const { encryptData } = require('../../../utils/auth.js');
@@ -327,7 +327,7 @@ async function getAppUserById(id, req) {
 	return user;
 }
 
-module.exports = {
+export default {
 	createAppUser,
 	getAppUsers,
 	updateAppUser,

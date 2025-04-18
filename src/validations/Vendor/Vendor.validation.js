@@ -46,7 +46,7 @@ const validateUpdateVendor = (req, res, next) => {
   next()
 }
 
-module.exports = {
+export default {
   validateCreateVendor,
   validateUpdateVendor,
 }

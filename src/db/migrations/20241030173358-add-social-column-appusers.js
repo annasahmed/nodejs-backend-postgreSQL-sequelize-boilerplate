@@ -1,7 +1,7 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		// Check if the column already exists
 		const tableDescription = await queryInterface.describeTable('appUser');
@@ -21,5 +21,5 @@ module.exports = {
 		}
 	},
 
-	down: async (queryInterface, Sequelize) => {},
+	down: async (queryInterface, Sequelize) => { },
 };

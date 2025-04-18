@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query.js');
 const ApiError = require('../../../utils/ApiError.js');
-const { encryptData } = require('../../../utils/auth.js');
+const { encryptData } = require('../../../utils/auth.js').default;
 const config = require('../../../config/config.js');
 const db = require('../../../db/models/index.js').default;
 const userService = require('../../user.service');
@@ -82,7 +82,7 @@ async function updateTiming(req) {
 	return updatedTiming;
 }
 
-module.exports = {
+export default {
 	getTimings,
 	createTiming,
 	deleteTimingById,

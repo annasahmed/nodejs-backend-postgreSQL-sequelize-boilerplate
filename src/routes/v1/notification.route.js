@@ -32,4 +32,4 @@ router
 	.route('/:id/:notificationId')
 	.delete(notificationController.deleteAppNotification);
 
-module.exports = router;
+export default router;

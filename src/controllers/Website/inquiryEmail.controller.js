@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const { emailService } = require('../../services');
-const catchAsync = require('../../utils/catchAsync');
+import httpStatus from 'http-status'
+const { emailService } from '../../services'
+import catchAsync from '../../utils/catchAsync'
 
 const sendWebsiteEnquiryEmail = catchAsync(async (req, res) => {
 	//     const data={
@@ -21,6 +21,6 @@ const sendWebsiteEnquiryEmail = catchAsync(async (req, res) => {
 	res.status(httpStatus.CREATED).send({ message: 'Email Sent Successfully' });
 });
 
-module.exports = {
+export default {
 	sendWebsiteEnquiryEmail,
 };

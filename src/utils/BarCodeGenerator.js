@@ -1,4 +1,4 @@
-const {uploadToS3} = require('../services/image.service');
+const { uploadToS3 } = require('../services/image.service');
 
 const bwipjs = require('bwip-js');
 
@@ -34,6 +34,6 @@ async function generateBarCode(barcodeText, userId) {
 	return path;
 }
 
-module.exports = {
+export default {
 	generateBarCode
 }

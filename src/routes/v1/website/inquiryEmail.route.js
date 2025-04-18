@@ -6,4 +6,4 @@ const router = express.Router();
 
 router.post('/send-inquiry-email', websiteInquiryEmail.sendWebsiteEnquiryEmail);
 
-module.exports = router;
+export default router;

@@ -1,3 +1,6 @@
+// model/info.js
+import { baseAssociation, baseFields } from "./base_model";
+
 export default (sequelize, DataTypes) => {
 	const info = sequelize.define(
 		'info',
@@ -16,15 +19,32 @@ export default (sequelize, DataTypes) => {
 				type: DataTypes.TEXT,
 				allowNull: true,
 			},
+			cms_user_id: {
+				type: DataTypes.INTEGER,
+				allowNull: true,
+				references: {
+					model: 'cms_user',
+					key: 'id',
+				},
+				onDelete: 'SET NULL',
+				onUpdate: 'CASCADE',
+			},
+			...baseFields,
 		},
 		{
-			/**
-			 * By default, sequelize will automatically transform all passed model names into plural
-			 * References: https://sequelize.org/master/manual/model-basics.html#table-name-inference
-			 */
 			tableName: 'info',
-		},
+			timestamps: true,
+		}
 	);
+
+	info.associate = (models) => {
+		info.belongsTo(models.cms_user, {
+			foreignKey: 'cms_user_id',
+			onDelete: 'SET NULL',
+			onUpdate: 'CASCADE',
+		});
+		baseAssociation(info, models);
+	};
 
 	return info;
 };

@@ -1,2 +1,7 @@
-module.exports.websitePlaceController = require('./place.controller');
-module.exports.websiteSubCategoryController = require('./sub_category.controller');
+import websitePlaceController from './place.controller.js';
+import websiteSubCategoryController from './sub_category.controller.js';
+
+export {
+  websitePlaceController,
+  websiteSubCategoryController
+};

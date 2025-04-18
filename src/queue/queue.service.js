@@ -7,8 +7,7 @@ const sqsClient = new SQSClient({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
   }
 })
-const addJobToQueue = async (messageBody) =>
-{
+const addJobToQueue = async (messageBody) => {
   const params = {
     QueueUrl: QUEUE_URL,
     MessageBody: JSON.stringify(messageBody)
@@ -17,12 +16,11 @@ const addJobToQueue = async (messageBody) =>
   try {
     const data = await sqsClient.send(new SendMessageCommand(params))
     //console.log('Message sent, ID:', data.MessageId)
-  } catch (error)
-  {
+  } catch (error) {
     console.error('Error sending message:', error)
   }
 }
 
-module.exports = {
+export default {
   addJobToQueue
 }

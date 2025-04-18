@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query.js');
 const ApiError = require('../../../utils/ApiError.js');
-const { encryptData } = require('../../../utils/auth.js');
+const { encryptData } = require('../../../utils/auth.js').default;
 const config = require('../../../config/config.js');
 const db = require('../../../db/models/index.js').default;
 const userService = require('../../user.service.js');
@@ -73,19 +73,19 @@ async function createDeal(req) {
 			await Promise.all(
 				placeIdsArr?.length
 					? placeIdsArr?.map((placeId) => {
-							return db.place_to_deal.create({
-								dealId: id,
-								placeId: placeId,
-							});
-						})
+						return db.place_to_deal.create({
+							dealId: id,
+							placeId: placeId,
+						});
+					})
 					: [],
 				categoryIdsArr?.length
 					? categoryIdsArr?.map((categoryId) => {
-							return db.deal_to_subcategory.create({
-								dealId: id,
-								subCategoryId: categoryId,
-							});
-						})
+						return db.deal_to_subcategory.create({
+							dealId: id,
+							subCategoryId: categoryId,
+						});
+					})
 					: [],
 			);
 
@@ -304,7 +304,7 @@ async function getDealsWithoutCount(req) {
 			'days',
 			'timing',
 			'first_time',
-		'end_date',
+			'end_date',
 			'commission',
 			'created_date_time',
 			'modified_date_time',
@@ -459,31 +459,31 @@ async function updateDeal(req) {
 			const deletePlaceId =
 				Array.isArray(placeIdsArr) && placeIdsArr?.length >= 0
 					? await db.place_to_deal.destroy({
-							where: { deal_id: id },
-						})
+						where: { deal_id: id },
+					})
 					: null;
 			const deleteCatId =
 				Array.isArray(categoryIdsArr) && categoryIdsArr?.length >= 0
 					? await db.deal_to_subcategory.destroy({
-							where: { deal_id: id },
-						})
+						where: { deal_id: id },
+					})
 					: null;
 			await Promise.all(
 				Array.isArray(placeIdsArr) && placeIdsArr?.length
 					? placeIdsArr?.map((placeId) => {
-							return db.place_to_deal.create({
-								dealId: id,
-								placeId: placeId,
-							});
-						})
+						return db.place_to_deal.create({
+							dealId: id,
+							placeId: placeId,
+						});
+					})
 					: [],
 				Array.isArray(categoryIdsArr) && categoryIdsArr?.length
 					? categoryIdsArr?.map((categoryId) => {
-							return db.deal_to_subcategory.create({
-								dealId: id,
-								subCategoryId: categoryId,
-							});
-						})
+						return db.deal_to_subcategory.create({
+							dealId: id,
+							subCategoryId: categoryId,
+						});
+					})
 					: [],
 			);
 			return data[1];
@@ -492,7 +492,7 @@ async function updateDeal(req) {
 	return updatedDeal;
 }
 
-module.exports = {
+export default {
 	getDeals,
 	getDealsTitle,
 	getDealsWithoutCount,

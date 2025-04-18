@@ -37,7 +37,7 @@ const validateUpdateNotification = (req, res, next) => {
 
 	next();
 };
-module.exports = {
+export default {
 	validateCreateNotification,
 	validateUpdateNotification,
 };

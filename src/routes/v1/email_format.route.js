@@ -9,4 +9,4 @@ router
 	.post(emailFormatController.addEmailFormat);
 router.route('/:emailFormatId').patch(emailFormatController.updateEmailFormats);
 
-module.exports = router;
+export default router;

@@ -22,7 +22,7 @@ router.post(
 	authController.resetPassword,
 );
 
-module.exports = router;
+export default router;
 
 /**
  * @swagger

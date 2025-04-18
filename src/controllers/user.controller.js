@@ -1,7 +1,8 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { userService } = require('../services');
+import httpStatus from 'http-status';
+import catchAsync from '../utils/catchAsync.js';
+import ApiError from '../utils/ApiError.js';
+import { userService } from '../services/index.js';
+
 
 const getUsers = catchAsync(async (req, res) => {
 	const users = await userService.getUsers(req);
@@ -35,7 +36,7 @@ const updateUser = catchAsync(async (req, res) => {
 	res.send({ user });
 });
 
-module.exports = {
+export default {
 	getUsers,
 	getUser,
 	updateUser,

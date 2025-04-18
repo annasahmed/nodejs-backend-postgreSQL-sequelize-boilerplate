@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../../utils/query.js');
 const ApiError = require('../../../../utils/ApiError.js');
 const config = require('../../../../config/config.js');
@@ -242,7 +242,7 @@ async function deleteAffiliateCategoryById(req) {
 	return true;
 }
 
-module.exports = {
+export default {
 	getAffiliateCategories,
 	createAffiliateCategory,
 	updateAffiliateCategory,

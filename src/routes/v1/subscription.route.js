@@ -12,4 +12,4 @@ router
 
 router.route('/:id').patch(subscriptionController.updateSubscription);
 
-module.exports = router;
+export default router;

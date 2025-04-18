@@ -16,48 +16,70 @@ export default (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
+			image: {
+				type: DataTypes.STRING,
+				allowNull: true,
+			},
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				unique: true,
-			},
-			image: {
-				type: DataTypes.STRING,
-				allowNull: false,
-			},
-			status: {
-				type: DataTypes.BOOLEAN,
-				defaultValue:true,
-				allowNull: false,
-			},
-			role_id: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-			},
-			isLogged: {
-				type: DataTypes.BOOLEAN,
-				allowNull: false,
-				defaultValue: false,
+				validate: {
+					isEmail: true,
+				},
 			},
 			password: {
 				type: DataTypes.STRING,
 				allowNull: false,
-			}
+			},
+			is_logged: {
+				type: DataTypes.BOOLEAN,
+				allowNull: false,
+				defaultValue: false,
+			},
+			role_id: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+				references: {
+					model: 'role',
+					key: 'id',
+				},
+				onDelete: 'RESTRICT',
+				onUpdate: 'CASCADE',
+			},
 		},
 		{
-			/**
-			 * By default, sequelize will automatically transform all passed model names into plural
-			 * References: https://sequelize.org/master/manual/model-basics.html#table-name-inference
-			 */
 			tableName: 'cms_user',
-			timestamps: true, 
-		},
+			timestamps: true,
+			defaultScope: {
+				attributes: { exclude: ['password'] },
+			},
+			// if want to get password then use cms_user.scope('withPassword').findOne()
+			scopes: {
+				withPassword: {
+					attributes: {},
+				},
+			},
+			// indexes: [
+			// 	{
+			// 		fields: ['email'],
+			// 		unique: true,
+			// 	},
+			// 	{
+			// 		fields: ['status'],
+			// 	},
+			// ],
+		}
 	);
 
 	cms_user.associate = (models) => {
-		cms_user.belongsTo(models.role);
-		cms_user.hasMany(models.sub_category);
-		cms_user.hasMany(models.cuisine);
+		cms_user.belongsTo(models.role, {
+			foreignKey: 'role_id',
+			onDelete: 'RESTRICT',
+			onUpdate: 'CASCADE',
+		});
+
+		cms_user.hasOne(models.token);
 	};
 
 	return cms_user;

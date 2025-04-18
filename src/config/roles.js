@@ -1,4 +1,4 @@
-const AccessControl = require('accesscontrol');
+import AccessControl from 'accesscontrol';
 
 const ac = new AccessControl();
 
@@ -42,7 +42,7 @@ const roles = (function () {
 	return ac;
 })();
 
-module.exports = {
+export default {
 	roles,
 	resources,
 };

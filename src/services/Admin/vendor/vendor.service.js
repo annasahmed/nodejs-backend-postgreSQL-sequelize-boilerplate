@@ -1,15 +1,15 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const ApiError = require('../../../utils/ApiError');
 const db = require('../../../db/models').default;
 const {
 	checkDeletedCondition,
 	softDelete,
 } = require('../../../utils/globals.js');
-const { encryptData } = require('../../../utils/auth');
+const { encryptData } = require('../../../utils/auth').default;
 const { Op, Sequelize } = require('sequelize');
 const { emailService, imageService } = require('../../index');
 const stripe = require('../../../config/stripe');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 const {
 	sendInvoiceEmail,
 	attachContractFormat,
@@ -1032,7 +1032,7 @@ const getVendorsExport = async (req) => {
 	return vendors;
 };
 
-module.exports = {
+export default {
 	getVendors,
 	createVendor,
 	deleteVendorById,

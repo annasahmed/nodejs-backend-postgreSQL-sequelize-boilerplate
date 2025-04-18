@@ -1,8 +1,8 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../utils/query');
-const ApiError = require('../utils/ApiError');
+import ApiError from '../utils/ApiError';
 const config = require('../config/config.js');
-const db = require('../db/models').default;
+import db from '../db/models'
 const { updatePlaceCategories, updatePlaceFilters } = require('../utils/globals.js');
 
 async function getRoleById(roleId) {
@@ -151,7 +151,7 @@ async function deleteRoleById(roleId) {
 
 	return deletedRole;
 }
-module.exports = {
+export default {
 	getRoleById,
 	getRoles,
 	createRole,

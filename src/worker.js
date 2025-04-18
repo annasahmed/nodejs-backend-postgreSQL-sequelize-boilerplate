@@ -1,6 +1,6 @@
-const { Consumer } = require('sqs-consumer')
-const { createUserNotification } = require('./services/notification/admin/notification.service')
-const { SQSClient } = require("@aws-sdk/client-sqs");
+import { Consumer } from 'sqs-consumer';
+import { createUserNotification } from './services/notification/admin/notification.service.js';
+import { SQSClient } from '@aws-sdk/client-sqs';
 
 const sqsClient = new SQSClient({
   region: process.env.AWS_REGION,

@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { adminHappeningBadgeService } = require('../services');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
+const { adminHappeningBadgeService } from '../services'
 
 const getHappeningBadges = catchAsync(async (req, res) => {
 	const happeningBadges =
@@ -26,7 +26,7 @@ const deleteHappeningBadge = catchAsync(async (req, res) => {
 	res.status(httpStatus.ACCEPTED).send({ message: 'deleted successfully' });
 });
 
-module.exports = {
+export default {
 	getHappeningBadges,
 	addHappeningBadge,
 	deleteHappeningBadge,

@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { adminCurrencyService, imageService } = require('../services');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
+const { adminCurrencyService, imageService } from '../services'
 // https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_wnmEcQ6HkM9hPjDXAirWHaJKfn9ERZQq4tpl5VHB&currencies=EUR%2CUSD%2CCAD
 const getCurrencyById = catchAsync(async (req, res) => {
 	const Currency = await adminCurrencyService.getCurrencyById(
@@ -41,7 +41,7 @@ const updateCurrenctRates = catchAsync(async (req, res) => {
 	res.status(httpStatus.ACCEPTED).send({ message: 'updated successfully' });
 });
 
-module.exports = {
+export default {
 	getCurrencies,
 	addCurrency,
 	deleteCurrency,

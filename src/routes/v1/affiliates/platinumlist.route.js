@@ -31,4 +31,4 @@ router
 	.route('/admin/reorder')
 	.post(platinumListController.reorderAffiliateCategory);
 
-module.exports = router;
+export default router;

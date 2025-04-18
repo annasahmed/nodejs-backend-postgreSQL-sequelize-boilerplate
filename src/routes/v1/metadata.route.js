@@ -18,4 +18,4 @@ router.route('/dashboard').get(metadataController.getMetadataDashboard);
 router
 	.route('/invoices-reports')
 	.get(metadataController.getInvoicesReportDashboard);
-module.exports = router;
+export default router;

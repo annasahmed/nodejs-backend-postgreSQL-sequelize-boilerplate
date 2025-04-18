@@ -1,5 +1,5 @@
 // 'use strict'
-// module.exports = {
+// export default {
 // 	up: (queryInterface, Sequelize) => {
 // 		// queryInterface.createTable('media', {
 // 		// 	id: {
@@ -40,7 +40,7 @@
 // };
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		// await queryInterface.addColumn('category', 'user_id', {
 		// 	type: Sequelize.INTEGER,

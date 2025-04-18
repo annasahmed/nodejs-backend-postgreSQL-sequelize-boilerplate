@@ -1,5 +1,5 @@
-const catchAsync = require('../utils/catchAsync');
-const {
+import catchAsync from '../utils/catchAsync';
+import {
 	adminSubCategoryService,
 	adminCategoryService,
 	trendingService,
@@ -24,12 +24,12 @@ const {
 	adminPlatinumListService,
 	adminVendorService,
 	subscriptionService,
-} = require('../services');
-const { adminCuisineService } = require('../services');
-const { adminUspService } = require('../services');
-const {
+} from '../services'
+import { adminCuisineService } from '../services'
+import { adminUspService } from '../services'
+import {
 	getAdminAffiliateCategories,
-} = require('./affiliates/platinumList.controler');
+} from './affiliates/platinumList.controler';
 
 const getMetadata = catchAsync(async (req, res) => {
 	req.query.limit = 100000;
@@ -289,7 +289,7 @@ const getInvoicesReportDashboard = catchAsync(async (req, res) => {
 	});
 });
 
-module.exports = {
+export default {
 	getMetadata,
 	getMetadataCms,
 	getMetadataDashboard,

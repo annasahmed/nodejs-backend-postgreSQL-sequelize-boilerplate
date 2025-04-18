@@ -11,4 +11,4 @@ router
 	.delete(areaController.deleteArea)
 	.patch(areaController.updateArea);
 
-module.exports = router;
+export default router;

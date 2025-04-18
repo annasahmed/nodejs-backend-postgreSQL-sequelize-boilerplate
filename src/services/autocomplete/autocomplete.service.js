@@ -10,7 +10,7 @@ async function searchPlace(req) {
         [Op.iLike]: `%${title}%`
       }
     },
-    attributes: [['id', 'value'], ['title', 'label'],['id','id']],
+    attributes: [['id', 'value'], ['title', 'label'], ['id', 'id']],
     order: [
       ['title', 'ASC'],
       ['created_date_time', 'DESC'],
@@ -20,6 +20,6 @@ async function searchPlace(req) {
   });
 }
 
-module.exports = {
+export default {
   searchPlace
 }

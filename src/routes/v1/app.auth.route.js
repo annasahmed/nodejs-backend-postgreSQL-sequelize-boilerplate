@@ -33,7 +33,7 @@ router.post(
 	appAuthController.resetPassword,
 );
 
-module.exports = router;
+export default router;
 
 /**
  * @swagger

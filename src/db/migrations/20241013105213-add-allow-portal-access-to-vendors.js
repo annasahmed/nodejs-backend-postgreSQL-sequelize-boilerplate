@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
   up: async (queryInterface, Sequelize) => {
     const vendorPlace = await queryInterface.describeTable('vendors')
     if (!vendorPlace.allow_portal_access) {
@@ -14,7 +14,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const vendorPlace = await queryInterface.describeTable('vendors')
-    if (vendorPlace.allow_portal_access){
+    if (vendorPlace.allow_portal_access) {
       await queryInterface.removeColumn('vendors', 'allow_portal_access');
     }
   }

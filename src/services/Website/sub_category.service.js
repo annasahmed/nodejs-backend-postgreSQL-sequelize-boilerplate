@@ -15,6 +15,6 @@ const getCategories = async () => {
 	return subCategories;
 };
 
-module.exports = {
+export default {
 	getCategories,
 };

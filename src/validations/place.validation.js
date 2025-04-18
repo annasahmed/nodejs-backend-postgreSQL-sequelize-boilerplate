@@ -79,7 +79,7 @@ const updatePlace = {
 	}),
 };
 
-module.exports = {
+export default {
 	createPlace,
 	updatePlace,
 };

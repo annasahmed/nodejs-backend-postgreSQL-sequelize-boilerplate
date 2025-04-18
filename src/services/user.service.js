@@ -1,13 +1,13 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../utils/query');
-const ApiError = require('../utils/ApiError');
-const { encryptData } = require('../utils/auth');
+import ApiError from '../utils/ApiError';
+const { encryptData } = require('../utils/auth').default;
 const config = require('../config/config.js');
-const db = require('../db/models').default;
+import db from '../db/models'
 const roleService = require('./role.service');
 const { refactorCode } = require('../utils/globals.js');
 const { Op } = require('sequelize');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 const { imageService } = require('./index');
 const { uploadToS3 } = require('./image.service');
 const { default: axios } = require('axios');
@@ -242,7 +242,7 @@ async function updateUser(req) {
 	);
 }
 
-module.exports = {
+export default {
 	getUserByEmail,
 	getAppUserByEmail,
 	getUserById,

@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { adminEmirateService } = require('../services');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
+const { adminEmirateService } from '../services'
 
 const getEmirates = catchAsync(async (req, res) => {
 	const emirates = await adminEmirateService.getEmirates(req);
@@ -21,7 +21,7 @@ const updateEmirate = catchAsync(async (req, res) => {
 	const emirate = await adminEmirateService.updateEmirate(req);
 	res.status(httpStatus.ACCEPTED).send({ emirate });
 });
-module.exports = {
+export default {
 	getEmirates,
 	addEmirate,
 	deleteEmirate,

@@ -32,4 +32,4 @@ router
 
 router.route('/reorder').post(subCategoryController.reorderSubCategories);
 
-module.exports = router;
+export default router;

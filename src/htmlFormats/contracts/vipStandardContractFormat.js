@@ -281,4 +281,4 @@ const vipStandartContractFormat = `<html lang="en">
     </body>
 </html>
 `;
-module.exports = { vipStandartContractFormat };
+export default { vipStandartContractFormat };

@@ -1,12 +1,12 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const {
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import {
 	authService,
 	userService,
 	emailService,
 	tokenService,
-} = require('../services');
-const { verifyToken } = require('../utils/auth');
+} from '../services'
+import { verifyToken } from '../utils/auth';
 
 const register = catchAsync(async (req, res) => {
 	// const image = await imageService.uploadImageToS3(req);
@@ -48,7 +48,7 @@ const resetPassword = catchAsync(async (req, res) => {
 	res.send({ success: true });
 });
 
-module.exports = {
+export default {
 	register,
 	login,
 	forgotPassword,

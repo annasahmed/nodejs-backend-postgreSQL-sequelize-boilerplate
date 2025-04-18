@@ -1,5 +1,5 @@
-const catchAsync = require('../utils/catchAsync');
-const {
+import catchAsync from '../utils/catchAsync';
+import {
 	authService,
 	userService,
 	emailService,
@@ -8,13 +8,13 @@ const {
 	adminappUserService,
 	vendorService,
 	adminVendorService,
-} = require('../services');
-const { verifyToken, decryptData } = require('../utils/auth');
-const ApiError = require('../utils/ApiError');
-const { compare } = require('bcrypt');
-const httpStatus = require('http-status');
-const { vendorPortalService } = require('../services/Admin');
-const db = require('../db/models').default;
+} from '../services'
+import { verifyToken, decryptData } from '../utils/auth.js';
+import ApiError from '../utils/ApiError.js';
+import { compare } from 'bcrypt';
+import httpStatus from 'http-status';
+import { vendorPortalService } from '../services/Admin/index.js';
+import db from '../db/models/index.js';
 
 const sendOtp = catchAsync(async (req, res) => {
 	const { email } = req.body;
@@ -207,7 +207,7 @@ const getTotalUnpaidInvoicesByVendor = catchAsync(async (req, res) => {
 	});
 });
 
-module.exports = {
+export default {
 	login,
 	forgotPassword,
 	resetPassword,

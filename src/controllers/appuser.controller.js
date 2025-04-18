@@ -1,11 +1,11 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
 const {
 	userService,
 	adminappUserService,
 	imageService,
-} = require('../services');
+} from '../services'
 
 const getAppUserById = catchAsync(async (req, res) => {
 	const user = await adminappUserService.getAppUserById(req.params.userId);
@@ -68,7 +68,7 @@ const updateAppUser = catchAsync(async (req, res) => {
 	res.send({ user });
 });
 
-module.exports = {
+export default {
 	getAppUsers,
 	updateAppUser,
 	addFavouritePlace,

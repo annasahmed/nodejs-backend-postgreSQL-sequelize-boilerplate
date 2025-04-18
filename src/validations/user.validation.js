@@ -9,7 +9,7 @@ const createUser = {
 		last_name: Joi.string(),
 		roleId: Joi.number(),
 		image: Joi.any().optional(),
-		status:Joi.boolean()
+		status: Joi.boolean()
 	}),
 };
 
@@ -42,7 +42,7 @@ const updateUser = {
 			last_name: Joi.string(),
 			roleId: Joi.number(),
 			image: Joi.any().optional(),
-			status:Joi.boolean()
+			status: Joi.boolean()
 		})
 		.min(1),
 };
@@ -53,7 +53,7 @@ const deleteUser = {
 	}),
 };
 
-module.exports = {
+export default {
 	createUser,
 	getUsers,
 	getUser,

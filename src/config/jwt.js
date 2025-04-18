@@ -1,9 +1,9 @@
-// const expressJwt = require('express-jwt');
-const { expressjwt: expressJwt } = require('express-jwt');
-const config = require('./config.js');
+import { expressjwt as expressJwt } from 'express-jwt';
+import config from './config.js';
+
 
 async function isRevoked(_req, _payload, done) {
-	// done();
+	done();
 }
 
 function jwt() {
@@ -15,11 +15,6 @@ function jwt() {
 			if (header && header.split(' ')[0] === 'Bearer') {
 				return header.split(' ')[1];
 			}
-			if (header) {
-				return header;
-			} else if (req.query.token) {
-				return req.query.token;
-			}
 			return null;
 		},
 		algorithms: ['HS256'],
@@ -27,12 +22,12 @@ function jwt() {
 	}).unless({
 		path: [
 			// public routes that don't require authentication
-			// /\/v[1-9](\d)*\/(auth\/|appauth\/|docs|test|initial|metadata|image|check)(?!\/).*/, //uncomment this
-			// /\/v[1-9](\d)*\/(auth\/|appauth\/|docs|test|initial|metadata|image|check)(?!\/).*|\/v1\/appauth\/.*?/,
-			// /\/v[1-9](\d)*\/(auth\/|docs\/|roles)(?!\/).*/, //comment this
 			/\/v[1-9](\d)*\/(auth|appauth|vendors\/portal\/contract|vendors\/portal\/login|vendors\/portal\/reset-password|test\/|website\/|health-check|image|page|stripe|convert-html|contract\/|check\/)\/*.*/,
 		],
+	}).on('error', (err, req, res, next) => {
+		// Customize error response
+		res.status(401).json({ message: 'Unauthorized access', error: err.message });
 	});
 }
 
-module.exports = jwt;
+export default jwt;

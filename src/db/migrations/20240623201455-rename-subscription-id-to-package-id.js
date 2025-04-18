@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		// Function to check if column exists in a table
 		async function columnExists(tableName, columnName) {

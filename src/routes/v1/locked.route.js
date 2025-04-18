@@ -12,4 +12,4 @@ router
 
 router.route('/:table/:userId/:recordId').get(lockedController.getLocked);
 
-module.exports = router;
+export default router;

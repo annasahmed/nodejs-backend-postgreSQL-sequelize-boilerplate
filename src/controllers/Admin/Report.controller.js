@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../../utils/catchAsync');
-const { adminReportsService } = require('../../services');
+import httpStatus from 'http-status'
+import catchAsync from '../../utils/catchAsync'
+const { adminReportsService } from '../../services'
 
 const appUsersReport = catchAsync(async (req, res) => {
 	const records = await adminReportsService.appUsersReport(req);
@@ -27,7 +27,7 @@ const getExpiringHappenings = catchAsync(async (req, res) => {
 	res.send({ ...records });
 });
 
-module.exports = {
+export default {
 	appUsersReport,
 	dealRedemptionReport,
 	vendorReport,

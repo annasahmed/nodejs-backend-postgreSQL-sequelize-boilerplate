@@ -30,4 +30,4 @@ router
 		storiesController.updateStory,
 	);
 
-module.exports = router;
+export default router;

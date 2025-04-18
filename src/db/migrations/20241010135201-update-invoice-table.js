@@ -1,13 +1,13 @@
 'use strict'
 
-module.exports = {
+export default {
   up: async (queryInterface, Sequelize) => {
     const invoice = await queryInterface.describeTable('invoice')
     if (invoice.place_id) {
       await queryInterface.removeColumn('invoice', 'place_id') // Remove place_id column
     }
 
-    if (!invoice.vendor_id){
+    if (!invoice.vendor_id) {
       await queryInterface.addColumn('invoice', 'vendor_id', {
         type: Sequelize.INTEGER,
         allowNull: true,
@@ -21,7 +21,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const invoice = await queryInterface.describeTable('invoice')
-    if (invoice.vendor_id){
+    if (invoice.vendor_id) {
       await queryInterface.removeColumn('invoice', 'vendor_id')
     }
     if (!invoice.vendor_id) {

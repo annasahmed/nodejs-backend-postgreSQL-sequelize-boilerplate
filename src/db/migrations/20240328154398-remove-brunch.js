@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
   up: async (queryInterface, Sequelize) => {
     // Remove rows where sub_category_id = 1 and days contains 'daily'
     await queryInterface.sequelize.query(`

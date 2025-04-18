@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query.js');
 const ApiError = require('../../../utils/ApiError.js');
-const { encryptData } = require('../../../utils/auth.js');
+const { encryptData } = require('../../../utils/auth.js').default;
 const config = require('../../../config/config.js');
 const db = require('../../../db/models/index.js').default;
 const userService = require('../../user.service.js');
@@ -212,19 +212,19 @@ async function createMonthlyDeal(req) {
 			await Promise.all(
 				dealIdsArr?.length
 					? dealIdsArr?.map((dealId) => {
-							return db.monthly_deal_to_deal.create({
-								monthlyDealId: id,
-								dealId: dealId,
-							});
-						})
+						return db.monthly_deal_to_deal.create({
+							monthlyDealId: id,
+							dealId: dealId,
+						});
+					})
 					: [],
 				categoryIdsArr?.length
 					? categoryIdsArr?.map((categoryId) => {
-							return db.subcategory_to_monthlydeal.create({
-								monthlyDealId: id,
-								subCategoryId: categoryId,
-							});
-						})
+						return db.subcategory_to_monthlydeal.create({
+							monthlyDealId: id,
+							subCategoryId: categoryId,
+						});
+					})
 					: [],
 			);
 
@@ -636,21 +636,21 @@ async function updateMonthlyDeal(req) {
 			const id = req.params.monthlyDealId || req.body.id;
 			const deleteCatIds = categoryIdsArr?.length
 				? await db.subcategory_to_monthlydeal.destroy({
-						where: { monthlyDealId: id },
-					})
+					where: { monthlyDealId: id },
+				})
 				: null;
 			const placeIds = placeIdsArr?.length
 				? await db.place_to_monthly_deal.destroy({
-						where: { monthlyDealId: id },
-					})
+					where: { monthlyDealId: id },
+				})
 				: null;
 			placeIdsArr?.length
 				? await db.place_to_monthly_deal
-						.destroy({
-							where: { monthlyDealId: id },
-						})
-						.then(() => [])
-						.catch((err) => [])
+					.destroy({
+						where: { monthlyDealId: id },
+					})
+					.then(() => [])
+					.catch((err) => [])
 				: [];
 			await Promise.all(
 				// dealIdsArr?.length
@@ -664,19 +664,19 @@ async function updateMonthlyDeal(req) {
 
 				categoryIdsArr?.length
 					? categoryIdsArr?.map((categoryId) => {
-							return db.subcategory_to_monthlydeal.create({
-								monthlyDealId: id,
-								subCategoryId: categoryId,
-							});
-						})
+						return db.subcategory_to_monthlydeal.create({
+							monthlyDealId: id,
+							subCategoryId: categoryId,
+						});
+					})
 					: [],
 				placeIdsArr?.length
 					? placeIdsArr?.map((placeId) => {
-							return db.place_to_monthly_deal.create({
-								monthlyDealId: id,
-								placeId: placeId,
-							});
-						})
+						return db.place_to_monthly_deal.create({
+							monthlyDealId: id,
+							placeId: placeId,
+						});
+					})
 					: [],
 			);
 			return data[1];
@@ -685,8 +685,8 @@ async function updateMonthlyDeal(req) {
 	return updatedMonthlyDeal;
 }
 
-module.exports = {
-	getMonthlyDeals: () => {},
+export default {
+	getMonthlyDeals: () => { },
 	getMonthlyDealsWithoutCount,
 	createMonthlyDeal,
 	deleteMonthlyDealById,

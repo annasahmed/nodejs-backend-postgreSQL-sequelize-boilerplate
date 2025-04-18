@@ -1,9 +1,13 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { adminSubCategoryService, imageService } = require('../services');
-const { adminCuisineService } = require('../services');
-const { adminUspService } = require('../services');
+import httpStatus from 'http-status';
+import catchAsync from '../utils/catchAsync.js';
+import ApiError from '../utils/ApiError.js';
+import {
+	adminSubCategoryService,
+	imageService,
+	adminCuisineService,
+	adminUspService,
+} from '../services/index.js';
+
 
 const getSubCategoryById = catchAsync(async (req, res) => {
 	const subCategory = await adminSubCategoryService.getSubCategoryById(req);
@@ -53,7 +57,7 @@ const updateSubCategory = catchAsync(async (req, res) => {
 	const subCategory = await adminSubCategoryService.updateSubCategory(req);
 	res.status(httpStatus.ACCEPTED).send({ subCategory });
 });
-module.exports = {
+export default {
 	getSubCategories,
 	getSubCategoriesWebsite,
 	deleteSubCategory,

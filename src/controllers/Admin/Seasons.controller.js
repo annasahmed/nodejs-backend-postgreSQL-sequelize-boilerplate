@@ -1,12 +1,12 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../../utils/catchAsync');
-const { adminSeasonsService } = require('../../services');
+import httpStatus from 'http-status'
+import catchAsync from '../../utils/catchAsync'
+const { adminSeasonsService } from '../../services'
 const ApiError = require('../../utils/ApiError')
 
 // Get season by ID
 const getSeasonById = catchAsync(async (req, res) => {
 	const { seasonId } = req.params;
-	if (!seasonId){
+	if (!seasonId) {
 		throw new ApiError(httpStatus.BAD_REQUEST, 'Season ID is required');
 	}
 	const season = await adminSeasonsService.getSeasonById(seasonId);
@@ -43,7 +43,7 @@ const updateSeason = catchAsync(async (req, res) => {
 	res.status(httpStatus.ACCEPTED).send({ season });
 });
 
-module.exports = {
+export default {
 	getSeasons,
 	getSeasonById,
 	addSeason,

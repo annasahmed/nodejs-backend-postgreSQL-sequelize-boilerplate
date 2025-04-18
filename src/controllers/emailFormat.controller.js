@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { adminEmailFormat } = require('../services');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
+const { adminEmailFormat } from '../services'
 
 const getCuisineById = catchAsync(async (req, res) => {
 	const cuisine = await adminEmailFormat.getCuisineById(req.params.cuisineId);
@@ -25,7 +25,7 @@ const updateEmailFormats = catchAsync(async (req, res) => {
 	const emailFormats = await adminEmailFormat.updateEmailFormats(req);
 	res.status(httpStatus.ACCEPTED).send({ emailFormats });
 });
-module.exports = {
+export default {
 	getEmailFormats,
 	addEmailFormat,
 	updateEmailFormats,

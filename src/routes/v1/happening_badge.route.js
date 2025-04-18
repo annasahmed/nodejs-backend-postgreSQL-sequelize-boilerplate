@@ -16,4 +16,4 @@ router
 	.patch(happeningBadgeController.updateHappeningBadge)
 	.delete(happeningBadgeController.deleteHappeningBadge);
 
-module.exports = router;
+export default router;

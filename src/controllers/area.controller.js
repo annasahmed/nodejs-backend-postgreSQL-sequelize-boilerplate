@@ -1,7 +1,7 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
-const { adminAreaService } = require('../services');
+import httpStatus from 'http-status'
+import catchAsync from '../utils/catchAsync';
+import ApiError from '../utils/ApiError';
+const { adminAreaService } from '../services'
 
 const getAreas = catchAsync(async (req, res) => {
 	const areas = await adminAreaService.getAreas(req);
@@ -21,7 +21,7 @@ const updateArea = catchAsync(async (req, res) => {
 	const area = await adminAreaService.updateArea(req);
 	res.status(httpStatus.ACCEPTED).send({ area });
 });
-module.exports = {
+export default {
 	getAreas,
 	addArea,
 	deleteArea,

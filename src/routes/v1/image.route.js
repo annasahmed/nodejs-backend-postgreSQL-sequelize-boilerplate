@@ -13,4 +13,4 @@ router.route('/move').post(imageController.moveImage);
 // router.route('/delete').post(imageController.deleteImage);
 router.route('/resizeimage').post(imageController.resizeImage);
 
-module.exports = router;
+export default router;

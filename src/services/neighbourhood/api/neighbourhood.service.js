@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query');
 const ApiError = require('../../../utils/ApiError');
 const { encryptData } = require('../../../utils/auth');
@@ -79,6 +79,6 @@ async function getNeighbourhoods(req) {
 	return neighbourhoods;
 }
 
-module.exports = {
+export default {
 	getNeighbourhoods,
 };

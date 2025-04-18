@@ -1,41 +1,35 @@
-const jwt = require('jsonwebtoken');
-const bycrypt = require('bcrypt');
-const config = require('../config/config');
+import { sign, verify } from 'jsonwebtoken';
+import { genSalt, hash, compare } from 'bcrypt';
+import { jwt as _jwt } from '../config/config';
 
-function generateToken(data, expiresMs, secret = config.jwt.secret) {
-	// const token = jwt.sign(
-	// 	{ exp: Math.floor(expiresMs / 1000), ...data },
-	// 	secret,
-	// );
-	const token = jwt.sign({ ...data }, secret);
-	return token;
-}
-function expireToken(data, expiresMs, secret = config.jwt.secret) {
-	const token = jwt.sign(
-		{ exp: Math.floor(expiresMs / 1000), ...data },
-		secret,
-	);
-	return token;
+function generateToken(data, expiresMs = null, secret = _jwt.secret) {
+	const payload = { ...data };
+	if (expiresMs) {
+		payload.exp = Math.floor(expiresMs / 1000);
+	}
+	return sign(payload, secret);
 }
 
-async function verifyToken(token) {
+function verifyToken(token, secret = _jwt.secret) {
 	try {
-		const payload = jwt.verify(token, config.jwt.secret);
-		return payload;
+		return verify(token, secret);
 	} catch (err) {
-		throw new Error(`Invalid token`);
-		// throw new Error(`Invalid token: ${err}`);
+		throw new Error('Invalid or expired token');
 	}
 }
+function generateExpires(hours) {
+	return new Date(Date.now() + hours * 60 * 60 * 1000);
+}
+
 
 async function encryptData(string) {
-	const salt = await bycrypt.genSalt(10);
-	const hashedString = await bycrypt.hash(string, salt);
+	const salt = await genSalt(10);
+	const hashedString = await hash(string, salt);
 	return hashedString;
 }
 
 async function decryptData(string, hashedString) {
-	const isValid = await bycrypt.compare(string, hashedString);
+	const isValid = await compare(string, hashedString);
 	return isValid;
 }
 
@@ -46,15 +40,12 @@ function setCookie(res, cookieName, cookieValue, expiresMs) {
 	});
 }
 
-function generateExpires(hours) {
-	const ms = Math.floor(Date.now() + hours * 60 * 60 * 1000);
-	return ms;
-}
 
-module.exports = {
+export {
 	generateToken,
 	generateExpires,
 	verifyToken,
+
 	encryptData,
 	decryptData,
 	setCookie,

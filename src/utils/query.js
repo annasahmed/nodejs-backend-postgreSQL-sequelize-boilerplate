@@ -1,4 +1,4 @@
-const config = require('../config/config.js');
+import config from '../config/config.js';
 
 async function generateQuery(req, query) {
 	const result = await req.postgres
@@ -17,7 +17,7 @@ function getOffset(
 	return (page - 1) * limit;
 }
 
-module.exports = {
+export {
 	generateQuery,
 	getOffset,
 };

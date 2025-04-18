@@ -1,7 +1,6 @@
 const { NOT_FOUND } = require('http-status');
 const db = require('../../../db/models').default;
 const ApiError = require('../../../utils/ApiError.js');
-const { verifyToken } = require('../../../utils/auth.js');
 
 const getNotificationsByUserId = async (req, res) => {
 	const limit = req.query.limit ?? 10;
@@ -51,7 +50,7 @@ const deleteNotification = async (req, res) => {
 	}
 	return deleted;
 };
-module.exports = {
+export default {
 	getNotificationsByUserId,
 	deleteNotification,
 };

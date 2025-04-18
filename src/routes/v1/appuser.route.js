@@ -43,4 +43,4 @@ router
 
 router.get('/details/:userId', appuserController.getAppUserDetails);
 
-module.exports = router;
+export default router;

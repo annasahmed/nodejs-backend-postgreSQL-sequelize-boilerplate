@@ -1,8 +1,8 @@
 'use strict'
 
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface, Sequelize) {
+export default {
+  async up(queryInterface, Sequelize) {
     const tableDefinition = await queryInterface.describeTable('happening')
 
     if (!tableDefinition.season_id) {
@@ -17,7 +17,7 @@ module.exports = {
     }
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     const tableDefinition = await queryInterface.describeTable('happening');
 
     if (tableDefinition.trial_months) {

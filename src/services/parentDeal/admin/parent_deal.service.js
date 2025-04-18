@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const ApiError = require('../../../utils/ApiError.js');
 const db = require('../../../db/models/index.js').default;
 
@@ -50,7 +50,7 @@ async function deleteParentDealById(req) {
 }
 
 async function updateParentDeal(req) {
-	
+
 	const updatedDeal = await db.parent_deal
 		.update(
 			{ ...req.body },
@@ -69,7 +69,7 @@ async function updateParentDeal(req) {
 	return updatedDeal;
 }
 
-module.exports = {
+export default {
 	getParentDeals,
 	createParentDeal,
 	deleteParentDealById,

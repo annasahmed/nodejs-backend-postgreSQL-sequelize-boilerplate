@@ -14,4 +14,4 @@ router
 	.delete(neighbourhoodController.deleteNeighbourhood)
 	.patch(neighbourhoodController.updateNeighbourhood);
 
-module.exports = router;
+export default router;

@@ -185,4 +185,4 @@ const termAndConditonFomrat = `<article class="page">
 	</body>
 </html>
 `;
-module.exports = { termAndConditonFomrat };
+export default { termAndConditonFomrat };

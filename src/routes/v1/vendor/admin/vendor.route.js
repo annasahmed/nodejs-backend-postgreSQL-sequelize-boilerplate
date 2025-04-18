@@ -56,4 +56,4 @@ router
 
 router.route('/export/all').get(vendorController.getVendorsExport);
 
-module.exports = router;
+export default router;

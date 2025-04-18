@@ -1,5 +1,5 @@
 const { numberToWords, padNumber } = require('../../utils/globals');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 const receiptFormat = (vendor, records, data) => {
 	let html = `
 <html lang="en">
@@ -228,13 +228,13 @@ const receiptFormat = (vendor, records, data) => {
 
 	records.length > 0
 		? records.forEach((place) => {
-				html += `<div class="box">
+			html += `<div class="box">
 					<p class="flex-1 px-2">
 						${place.vendor_place?.place?.title || vendor.name}
 					</p>
 					<p class="flex-1 px-2" style="text-align: right">AED ${place.total_amount}</p> 
 				</div>`;
-			})
+		})
 		: (html += `<div class="box">
 					<p class="flex-1 px-2">
 						${vendor.name}
@@ -346,4 +346,4 @@ const receiptFormat = (vendor, records, data) => {
 	return html;
 };
 
-module.exports = { receiptFormat };
+export default { receiptFormat };

@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../../utils/catchAsync');
-const { stripeService } = require('../../services/Admin');
+import httpStatus from 'http-status'
+import catchAsync from '../../utils/catchAsync'
+import stripeService from '../../services/Admin'
 
 const stripeInvoicePaid = catchAsync(async (req, res) => {
 	const invoice = await stripeService.paymentSuccessIntent(req);
@@ -11,7 +11,7 @@ const stripeInvoicePaidManual = catchAsync(async (req, res) => {
 	res.status(httpStatus.ACCEPTED).send({ received: true, invoice });
 });
 
-module.exports = {
+export default {
 	stripeInvoicePaid,
 	stripeInvoicePaidManual,
 };

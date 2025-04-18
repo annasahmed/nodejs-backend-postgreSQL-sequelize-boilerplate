@@ -12,4 +12,4 @@ router
 	.get(categoryController.getCategories)
 	.post(categoryController.addCategory);
 
-module.exports = router;
+export default router;

@@ -88,7 +88,7 @@ const deleteRedemptionsByPlaceId = async (placeId) => {
 			stripeInvoice.push(
 				await stripe.invoices.voidInvoice(invoice.stripe_invoice_id),
 			);
-		} catch (error) {}
+		} catch (error) { }
 	}
 
 	return {
@@ -148,7 +148,7 @@ const deleteRedemptionsByPlaceIdChk = async (placeId) => {
 	};
 };
 
-module.exports = {
+export default {
 	getRedemptions,
 	deleteRedemptionsByPlaceId,
 	deleteRedemptionsByPlaceIdChk,

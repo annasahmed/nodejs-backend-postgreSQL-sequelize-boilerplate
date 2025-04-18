@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		await queryInterface.addIndex('deal_redemption', ['place_id'], {
 			name: 'place_id_index'

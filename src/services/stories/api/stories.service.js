@@ -44,6 +44,6 @@ async function getStories(req) {
 	return stories;
 }
 
-module.exports = {
+export default {
 	getStories,
 };

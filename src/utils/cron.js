@@ -1,9 +1,9 @@
 const cron = require('node-cron');
-const db = require('../db/models').default;
+import db from '../db/models'
 const { Op } = require('sequelize');
 const { sendRedemptionInvoice } = require('../services/email.service');
 const stripe = require('../config/stripe');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 const { FcmNotificationService } = require('../config/fcm');
 const { addJobToQueue } = require('../queue/queue.service');
 
@@ -307,7 +307,7 @@ const sendScheduledNotification = cron.schedule('* * * * *', async () => {
 	}
 });
 
-module.exports = {
+export default {
 	disabledPastHappenings,
 	sendRedemptionInvoices,
 	sendScheduledNotification,

@@ -32,4 +32,4 @@ router
 		vendorPortalController.getTotalUnpaidInvoicesByVendor,
 	);
 
-module.exports = router;
+export default router;

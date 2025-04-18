@@ -24,4 +24,4 @@ router
 		currencyController.updateCurrency,
 	);
 
-module.exports = router;
+export default router;

@@ -50,7 +50,7 @@ const deleteAppUser = {
 	}),
 };
 
-module.exports = {
+export default {
 	createAppUser,
 	getAppUsers,
 	getAppUser,

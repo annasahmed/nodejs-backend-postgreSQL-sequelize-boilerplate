@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query');
 const ApiError = require('../../../utils/ApiError');
 const config = require('../../../config/config.js');
@@ -150,7 +150,7 @@ async function getplaceToCusine() {
 	return subscriptionStatuses;
 }
 
-module.exports = {
+export default {
 	getTrendings,
 	getTrendingById,
 	getSubscriptionById,

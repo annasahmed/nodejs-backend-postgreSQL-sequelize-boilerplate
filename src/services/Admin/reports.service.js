@@ -1,7 +1,7 @@
 const db = require('../../db/models').default;
 const { Op, Sequelize, where } = require('sequelize');
 const { countanalytic } = require('../analytic/admin/analytic.service');
-const dayjs = require('dayjs');
+import dayjs from 'dayjs'
 const config = require('../../config/config');
 
 const appUsersReport = async (req) => {
@@ -515,7 +515,7 @@ const getExpiringHappenings = async (req) => {
 		limit: limit,
 	};
 };
-module.exports = {
+export default {
 	appUsersReport,
 	dealRedemptionReport,
 	vendorsReport,

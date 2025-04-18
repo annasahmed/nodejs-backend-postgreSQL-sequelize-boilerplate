@@ -7,4 +7,4 @@ const router = express.Router();
 
 router.route('/').get(websiteSubCategoryController.getCategories);
 
-module.exports = router;
+export default router;

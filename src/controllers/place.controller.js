@@ -1,26 +1,29 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const {
+import httpStatus from 'http-status';
+import catchAsync from '../utils/catchAsync.js';
+
+import {
 	adminPlaceService,
 	imageService,
 	apiPlaceService,
 	adminInvoiceService,
 	vendorService,
 	vendorInvoiceService,
-} = require('../services');
-const {
+} from '../services/index.js';
+
+import {
 	dealRedemptionService,
-	adminPlaceService: adminadminPlaceService,
+	adminPlaceService as adminadminPlaceService,
 	placeService,
 	stripeService,
-} = require('../services/Admin');
-const {
+} from '../services/Admin/index.js';
+
+import {
 	updatePlaceHappeningById,
 	getPlacesHappenings,
 	deletePlaceHappeningById,
 	updatePlaceHappeningStatusById,
 	createHappeningByPlaceId,
-} = require('../services/place/admin/happening.service');
+} from '../services/place/admin/happening.service.js';
 
 // both
 const getPlaceById = catchAsync(async (req, res) => {
@@ -337,7 +340,7 @@ const createPlaceHappening = catchAsync(async (req, res) => {
 	});
 });
 
-module.exports = {
+export default {
 	getPlaces,
 	deletePlace,
 	updatePlace,

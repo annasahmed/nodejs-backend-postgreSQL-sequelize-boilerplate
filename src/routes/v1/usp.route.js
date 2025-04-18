@@ -17,4 +17,4 @@ router
 	.delete(uspController.deleteUsp)
 	.patch(uspController.updateUsp);
 
-module.exports = router;
+export default router;

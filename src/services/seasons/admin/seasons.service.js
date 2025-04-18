@@ -9,13 +9,11 @@ const {
 } = require('../../../utils/globals.js')
 
 // Get season by title
-async function getSeasonByTitle (title, seasonId = null)
-{
+async function getSeasonByTitle(title, seasonId = null) {
   const conditions = {
     where: { title },
   }
-  if (seasonId)
-  {
+  if (seasonId) {
     conditions.where.id = {
       [db.Sequelize.Op.ne]: seasonId
     }
@@ -24,8 +22,7 @@ async function getSeasonByTitle (title, seasonId = null)
 }
 
 // Get season by ID
-async function getSeasonById (id)
-{
+async function getSeasonById(id) {
   return await db.seasons.findOne({
     where: { id },
     include: [
@@ -48,20 +45,17 @@ async function getSeasonById (id)
 }
 
 // Create a new season
-async function createSeason (req)
-{
+async function createSeason(req) {
   const { title, status, startDate, endDate } = req.body
   const userId = req.auth.userId
 
   const existingSeason = await getSeasonByTitle(title)
-  if (existingSeason)
-  {
+  if (existingSeason) {
     throw new ApiError(httpStatus.CONFLICT, 'This season already exists')
   }
 
   const user = await userService.getUserById(userId)
-  if (!user)
-  {
+  if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found')
   }
 
@@ -77,8 +71,7 @@ async function createSeason (req)
 }
 
 // Get all seasons with pagination
-async function getSeasons (req)
-{
+async function getSeasons(req) {
   const { page = 1, limit = 10 } = req.query
 
   const offset = getOffset(page, limit)
@@ -120,8 +113,7 @@ async function getSeasons (req)
   }
 }
 
-async function getAllSeasons (req)
-{
+async function getAllSeasons(req) {
   let where = {
     status: true,
     deleted_by: null,
@@ -146,23 +138,19 @@ async function getAllSeasons (req)
 }
 
 // Soft delete a season by ID
-async function deleteSeasonById (req)
-{
+async function deleteSeasonById(req) {
   const id = req.params.seasonId || req.body.id
   await softDelete(req, 'seasons', id)
   return true
 }
 
 // Update a season by ID
-async function updateSeason (req)
-{
+async function updateSeason(req) {
   const { title, status, startDate, endDate } = req.body
   const seasonId = req.params.seasonId
-  if (title)
-  {
+  if (title) {
     const season = await getSeasonByTitle(title, seasonId)
-    if (season)
-    {
+    if (season) {
       throw new ApiError(
         httpStatus.CONFLICT,
         'This season already exists'
@@ -186,7 +174,7 @@ async function updateSeason (req)
     .then((data) => data[1])
 }
 
-module.exports = {
+export default {
   getSeasons,
   createSeason,
   deleteSeasonById,

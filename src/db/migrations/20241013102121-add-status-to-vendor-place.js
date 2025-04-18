@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
   up: async (queryInterface, Sequelize) => {
     const vendorPlace = await queryInterface.describeTable('vendor_place')
     if (!vendorPlace.status) {
@@ -14,7 +14,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const vendorPlace = await queryInterface.describeTable('vendor_place')
-    if (vendorPlace.status){
+    if (vendorPlace.status) {
       await queryInterface.removeColumn('vendor_place', 'status');
     }
   }

@@ -30,4 +30,4 @@ router
     seasonsController.updateSeason
   )
 
-module.exports = router
+export default router

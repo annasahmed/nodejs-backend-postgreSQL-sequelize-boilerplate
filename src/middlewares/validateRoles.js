@@ -1,6 +1,6 @@
-const db = require('../db/models').default;
+import db from '../db/models'
 const { getUserById } = require('../services/user.service');
-const { verifyToken } = require('../utils/auth');
+import { verifyToken } from '../utils/auth'
 
 const getMethod = (method) => {
 	switch (method) {
@@ -100,6 +100,6 @@ const validateRoles = async (req, res, next) => {
 	next();
 };
 
-module.exports = {
+export default {
 	validateRoles,
 };

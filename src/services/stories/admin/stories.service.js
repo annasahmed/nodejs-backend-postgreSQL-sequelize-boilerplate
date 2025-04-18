@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+import httpStatus from 'http-status'
 const { getOffset } = require('../../../utils/query.js');
 const ApiError = require('../../../utils/ApiError.js');
 const config = require('../../../config/config.js');
@@ -167,7 +167,7 @@ async function deleteStoryById(req) {
 	return deletedStory;
 }
 
-module.exports = {
+export default {
 	getStories,
 	updateStory,
 	createStory,
